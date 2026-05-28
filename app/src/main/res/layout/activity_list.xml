@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lista de Asistencias"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="24dp" />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha inicio"
+                android:textStyle="bold" />
+
+        <EditText
+                android:id="@+id/datetime_inicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="YYYY-MM-DD"
+                android:inputType="date"
+                android:focusable="false"
+                android:clickable="true" />
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha fin"
+                android:textStyle="bold" />
+
+        <EditText
+                android:id="@+id/datetime_fin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="YYYY-MM-DD"
+                android:inputType="date"
+                android:focusable="false"
+                android:clickable="true" />
+
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+        <Button
+                android:id="@+id/btn_filt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Buscar"
+                android:backgroundTint="#35B968"/>
+
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+        <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:fillViewport="true">
+
+            <ScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                <TableLayout
+                        android:id="@+id/table_lista"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:stretchColumns="*" />
+
+            </ScrollView>
+
+        </HorizontalScrollView>
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+        <Button
+                android:id="@+id/btnVolver"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Volver"
+                android:backgroundTint="#974545"/>
+    </LinearLayout>
+
+</ScrollView>

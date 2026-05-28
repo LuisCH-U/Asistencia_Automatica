@@ -13,26 +13,24 @@ import com.pr_asistencia.asistencia_auto.App
 import com.pr_asistencia.asistencia_auto.models.LoginRequest
 import com.pr_asistencia.asistencia_auto.network.RetrofitClient
 import kotlinx.coroutines.launch
+import androidx.core.content.edit
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var etTenant: EditText
-    private lateinit var etUsuario: EditText
+    private lateinit var etUser: EditText
     private lateinit var etPassword: EditText
     private lateinit var btnLogin: Button
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_login)
 
         etTenant = findViewById(R.id.etTenant)
-        etUsuario = findViewById(R.id.etUsuario)
+        etUser = findViewById(R.id.etUser)
         etPassword = findViewById(R.id.etPassword)
-
         btnLogin = findViewById(R.id.btnLogin)
-
         verificarSesion()
 
         btnLogin.setOnClickListener {
@@ -40,7 +38,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun verificarSesion() {
+    private fun verificarSesion()
+    {
 
         val prefs = App.instance.securePrefs()
         val token = prefs.getString("token", null)
@@ -53,13 +52,14 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun login() {
+    private fun login()
+    {
 
         lifecycleScope.launch {
 
             try {
 
-                if (etTenant.text.isEmpty() || etUsuario.text.isEmpty() || etPassword.text.isEmpty()) {
+                if (etTenant.text.isEmpty() || etUser.text.isEmpty() || etPassword.text.isEmpty()) {
                     Toast.makeText(
                         this@LoginActivity,
                         "Por favor complete todos los campos",
@@ -71,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
                     .api
                     .login(
                         LoginRequest( tenantName = etTenant.text.toString(),
-                            userNameOrEmailAddress = etUsuario.text.toString(),
+                            userNameOrEmailAddress = etUser.text.toString(),
                             password = etPassword.text.toString(),
                             rememberClient = false
                         )
@@ -83,37 +83,18 @@ class LoginActivity : AppCompatActivity() {
 
                     guardarSesion(token!!)
 
-                    Toast.makeText(
-                        this@LoginActivity,
-                        "Login correcto",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Toast.makeText(this@LoginActivity, "Login correcto", Toast.LENGTH_LONG).show()
 
-                    startActivity(
-                        Intent(
-                            this@LoginActivity,
-                            HomeActivity::class.java
-                        )
-                    )
+                    startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
 
                     finish()
 
                 } else {
-
-                    Toast.makeText(
-                        this@LoginActivity,
-                        "Credenciales incorrectas",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Toast.makeText(this@LoginActivity, "Credenciales incorrectas", Toast.LENGTH_LONG).show()
                 }
 
             } catch (e: Exception) {
-
-                Toast.makeText(
-                    this@LoginActivity,
-                    e.message,
-                    Toast.LENGTH_LONG
-                ).show()
+                Toast.makeText(this@LoginActivity, e.message, Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -123,27 +104,23 @@ class LoginActivity : AppCompatActivity() {
 
         val prefs = App.instance.securePrefs()
 
-        prefs.edit()
-            .putString(
+        prefs.edit {
+            putString(
                 "tenant",
                 etTenant.text.toString().ifBlank { "inlearning" }
-            )
-            .putString(
+            ).
+            putString(
                 "token",
                 token
-            )
-            .putString(
-                "usuario",
-                etUsuario.text.toString()
-            )
-            .putString(
+            ).
+            putString(
                 "user",
-                etUsuario.text.toString()
-            )
-            .putString(
+                etUser.text.toString()
+            ).
+            putString(
                 "password",
                 etPassword.text.toString()
             )
-            .apply()
+        }
     }
 }

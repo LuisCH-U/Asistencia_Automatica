@@ -5,25 +5,29 @@ import com.pr_asistencia.asistencia_auto.models.AttendanceRequest
 import com.pr_asistencia.asistencia_auto.models.LoginRequest
 import com.pr_asistencia.asistencia_auto.network.RetrofitClient
 import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 
 object AttendanceManager {
 
-    suspend fun marcarAsistencia(): Boolean {
+    suspend fun marcarAsistencia():  Boolean
+    {
 
         return try {
 
             val prefs = App.instance.securePrefs()
+           //val marcaActual = OffsetDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm"))
+           //val ultimaMarca = prefs.getString("ultimaMarcaAsistencia", "")
+           //if (ultimaMarca == marcaActual) {
+           //    return true
+           //}
 
             val tenant = prefs.getString("tenant", "") ?: ""
-
-            val usuario = prefs.getString("usuario", "") ?: ""
-
+            val user = prefs.getString("user", "") ?: ""
             val password = prefs.getString("password", "") ?: ""
-
             val loginResponse = RetrofitClient.api.login(
                                     LoginRequest(
                                         tenantName = tenant,
-                                        userNameOrEmailAddress = usuario,
+                                        userNameOrEmailAddress = user,
                                         password = password,
                                         rememberClient = false
                                     )
@@ -39,14 +43,11 @@ object AttendanceManager {
 
                 if(nuevoToken != null)
                 {
-                    marcarAsistencia()
+                    return marcarAsistencia()
                 }
             }
 
-            val token = loginResponse.body()
-                        ?.result
-                        ?.accessToken
-                        ?: return false
+            val token = loginResponse.body()?.result?.accessToken?: return false
 
             val attendanceResponse = RetrofitClient.api.createAttendance(
                                          "Bearer $token",
@@ -67,46 +68,22 @@ object AttendanceManager {
         }
     }
 
-    private suspend fun reLogin(): String? {
 
+    private suspend fun reLogin(): String?
+    {
         return try {
 
             val prefs = App.instance.securePrefs()
+            val user = prefs.getString("user","") ?: ""
+            val password = prefs.getString("password","") ?: ""
+            val tenant = prefs.getString("tenant","inlearning") ?: "inlearning"
+            val body = LoginRequest(userNameOrEmailAddress = user, password = password, tenantName = tenant, rememberClient = false )
+            val response = RetrofitClient.api.login(body)
 
-            val user = prefs.getString(
-                "user",
-                ""
-            ) ?: ""
-
-            val password = prefs.getString(
-                "password",
-                ""
-            ) ?: ""
-
-            val tenant = prefs.getString(
-                "tenant",
-                "inlearning"
-            ) ?: "inlearning"
-
-            val body = LoginRequest(
-                userNameOrEmailAddress = user,
-                password = password,
-                tenantName = tenant,
-                rememberClient = false
-            )
-
-            val response = RetrofitClient.api
-                    .login(body)
-
-            if (response.isSuccessful) {
-
+            if (response.isSuccessful)
+            {
                 val token = response.body()?.result?.accessToken
-
-                prefs.edit().putString(
-                    "token",
-                    token
-                ).apply()
-
+                prefs.edit().putString("token",token).apply()
                 token
             }
             else
@@ -115,7 +92,6 @@ object AttendanceManager {
             }
 
         } catch (e: Exception) {
-
             null
         }
     }

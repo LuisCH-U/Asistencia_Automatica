@@ -6,12 +6,8 @@ object FirebaseManager {
 
     private val db = FirebaseFirestore.getInstance()
 
-    fun guardarConfiguracion(
-        user: String,
-        data: HashMap<String, Any>,
-        onSuccess: () -> Unit,
-        onError: (String) -> Unit
-    ) {
+    fun guardarConfiguracion(user: String, data: HashMap<String, Any>, onSuccess: () -> Unit, onError: (String) -> Unit)
+    {
 
         db.collection("users")
             .document(user)
@@ -26,22 +22,16 @@ object FirebaseManager {
             }
     }
 
-    fun obtenerConfiguracion(
-        user: String,
-        onSuccess: (Map<String, Any>?) -> Unit,
-        onError: (String) -> Unit
-    ) {
+    fun obtenerConfiguracion(user: String, onSuccess: (Map<String, Any>?) -> Unit, onError: (String) -> Unit)
+    {
 
         db.collection("users")
             .document(user)
             .get()
             .addOnSuccessListener {
-
                 onSuccess(it.data)
-
             }
             .addOnFailureListener {
-
                 onError(
                     it.message ?: "Error"
                 )

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+        <TextView
+                android:layout_width="347dp"
+                android:layout_height="wrap_content"
+                android:text="@string/configuraci_n_asis"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:capitalize="characters"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+        />
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+        />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hora Entrada"
+                android:textSize="16sp"
+                android:textStyle="bold"
+        />
+
+        <TextView
+                android:id="@+id/txtHoraEntrada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="08:00"
+                android:textSize="22sp"
+                android:background="#FFC107"
+        />
+
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+        />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hora Salida"
+                android:textSize="16sp"
+                android:textStyle="bold"
+        />
+
+        <TextView
+                android:id="@+id/txtHoraSalida"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="18:00"
+                android:textSize="22sp"
+                android:background="#FFC107"
+        />
+
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+        />
+
+        <Switch
+                android:id="@+id/switchAutomatico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Modo Automático"
+                android:backgroundTint="#4CAF50"
+                android:buttonTint="#8BC34A"
+        />
+
+        <Switch
+                android:id="@+id/switchActivo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Activar Asistencia"
+                android:buttonTint="#8BC34A"
+        />
+
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+        />
+
+        <TextView
+                android:layout_width="347dp"
+                android:layout_height="wrap_content"
+                android:text="Días Activos"
+                android:textStyle="bold"
+                android:textSize="18sp"
+        />
+
+        <CheckBox
+                android:id="@+id/checkLunes"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:text="Lunes"
+        />
+
+        <CheckBox
+                android:id="@+id/checkMartes"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:text="Martes"
+        />
+        <CheckBox
+                android:id="@+id/checkMiercoles"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:text="Miércoles"
+        />
+
+        <CheckBox
+                android:id="@+id/checkJueves"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:text="Jueves"
+        />
+
+        <CheckBox
+                android:id="@+id/checkViernes"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:text="Viernes"
+        />
+
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+        />
+
+        <Button
+                android:id="@+id/btnGuardar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Guardar Configuración"
+                android:backgroundTint="#009688"
+        />
+
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+        />
+
+        <Button
+                android:id="@+id/btnMarcarAhora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Marcar Asistencia Ahora"
+                android:backgroundTint="#8BC34A"
+        />
+
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+        />
+
+        <Button
+                android:id="@+id/btnCerrarSesion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cerrar Sesión"
+                android:backgroundTint="#BD5F57"
+        />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "377236095785",
+    "project_id": "asistencia-22da3",
+    "storage_bucket": "asistencia-22da3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377236095785:android:6d3d0bbad8260a4d116d38",
+        "android_client_info": {
+          "package_name": "com.pr_asistencia.asistencia_auto"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVEnVUl53jPcQLuOM1uoB54i1n5martBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

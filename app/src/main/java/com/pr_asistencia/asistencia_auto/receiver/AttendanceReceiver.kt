@@ -22,8 +22,8 @@ class AttendanceReceiver : BroadcastReceiver() {
     {
         val tipo = intent.getIntExtra("tipo", 0)
         val now = Date()
-        Log.d("Asistencia","Receiver ejecutado tipo: $tipo, horaReal: $now")
-        NotificationHelper.show(context, "Asistencia", "Receiver ejecutado tipo: $tipo, horaReal: $now")
+        //Log.d("Asistencia","Receiver ejecutado tipo: $tipo, horaReal: $now")
+        //NotificationHelper.show(context, "Asistencia", "Receiver ejecutado tipo: $tipo, horaReal: $now")
 
         CoroutineScope(Dispatchers.IO).launch {
             try
@@ -37,13 +37,13 @@ class AttendanceReceiver : BroadcastReceiver() {
                 {
                     val entrada = horaEntrada!!.split(":")
                     AlarmHelper.programarAlarma(context,entrada[0].toInt(),entrada[1].toInt(),100)
-                    NotificationHelper.show(context,"Asistencia Programada - Entrada(AttendanceReceiver)","Entrada - Asistencia programada correctamente a las ${entrada[0]}:${entrada[1]}")
+                    NotificationHelper.show(context,"Entrada - AttendanceReceiver","Asistencia programada correctamente: ${entrada[0]}:${entrada[1]}")
                 }
                 else if (tipo == 200)
                 {
                     val salida = horaSalida!!.split(":")
                     AlarmHelper.programarAlarma(context,salida[0].toInt(),salida[1].toInt(),200)
-                    NotificationHelper.show(context,"Asistencia Programada - Salida(AttendanceReceiver)","Salida - Asistencia programada correctamente a las ${salida[0]}:${salida[1]}")
+                    NotificationHelper.show(context,"Salida - AttendanceReceiver","Asistencia programada correctamente: ${salida[0]}:${salida[1]}")
                 }
 
                 val activo = prefs.getBoolean("activo", false)
@@ -64,32 +64,32 @@ class AttendanceReceiver : BroadcastReceiver() {
                 }
 
                 if (!diaActivo) {
-                    Log.d("Asistencia(AttendanceReceiver)", "Día no activo. No se marcará asistencia.")
-                    NotificationHelper.show(context, "Asistencia(AttendanceReceiver)", "Día no activo. No se marcará asistencia.")
+                    Log.d("Dia activo", "No se marcará asistencia.")
+                    NotificationHelper.show(context, "Dia activo", "No se marcará asistencia.")
                     return@launch
                 }
 
                 if (!activo || !automatico)
                 {
-                    Log.d("Asistencia(AttendanceReceiver)","Asistencia marcada para pruebas de tipo=$tipo")
-                    NotificationHelper.show(context,"Asistencia(AttendanceReceiver)","Asistencia marcada para pruebas de tipo=$tipo")
+                    Log.d("Inactivo","Asistencia marcada, solo pruebas tipo: $tipo - horaReal: $now")
+                    NotificationHelper.show(context,"Inactivo","Asistencia marcadasolo pruebas tipo: $tipo - horaReal: $now")
                     return@launch
                 }
 
                 val ok = AttendanceManager.marcarAsistencia()
 
                 if (ok) {
-                    Log.d("Asistencia(AttendanceReceiver)", "Asistencia marcada correctamente tipo=$tipo")
-                    NotificationHelper.show(context, "Asistencia(AttendanceReceiver)", "Asistencia marcada correctamente tipo=$tipo"
+                    Log.d("Asistencia - OK", "Asistencia marcada correctamente - tipo:$tipo, horaReal: $now")
+                    NotificationHelper.show(context, "Asistencia - OK", "Asistencia marcada correctamente - tipo: $tipo - horaReal: $now"
                     )
                 } else {
-                    Log.d("Asistencia(AttendanceReceiver)", "No se pudo marcar asistencia tipo=$tipo")
-                    NotificationHelper.show(context, "Asistencia(AttendanceReceiver)", "No se pudo marcar asistencia tipo=$tipo")
+                    Log.d("Asistencia - Error", "Error al marcar asistencia - tipo: $tipo, horaReal: $now")
+                    NotificationHelper.show(context, "Asistencia - Error", "Error al marcar asistencia - tipo;:$tipo - horaReal: $now")
                 }
 
             } catch (e: Exception)
             {
-                Log.e("Asistencia(AttendanceReceiver)", "Error en AttendanceReceiver", e)
+                Log.e("Asistencia - Ex", "Error en AttendanceReceiver", e)
                 NotificationHelper.show(context, "Error AttendanceReceiver", e.message ?: "Error desconocido")
                 e.printStackTrace()
             }

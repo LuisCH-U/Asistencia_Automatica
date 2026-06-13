@@ -18,13 +18,15 @@ object AttendanceManager {
             val prefs = App.instance.securePrefs()
             val marcaActual = OffsetDateTime.now()
             val ultimaMarca = prefs.getString("ultimaMarcaAsistencia", "")
-            NotificationHelper.show(App.instance, "Ultima Asistenicia", "Ultima marca = $ultimaMarca, Marca actual = $marcaActual")
+
+            NotificationHelper.show(App.instance, "Ultima Asistenicia", "Ultima: $ultimaMarca, Actual: $marcaActual")
+
             if (!ultimaMarca.isNullOrBlank()) {
                 val ultimaMarcaFecha = OffsetDateTime.parse(ultimaMarca)
                 val minutosDesdeUltimaMarca = java.time.Duration.between(ultimaMarcaFecha, marcaActual).toMinutes()
 
                 if (minutosDesdeUltimaMarca in 0..30) {
-                    NotificationHelper.show(App.instance, "Asistencia duplicada", "Ya se marcó asistencia hace $minutosDesdeUltimaMarca minutos. No se enviará otra marca.")
+                    NotificationHelper.show(App.instance, "Duplicado", "Ya se marcó asistencia hace $minutosDesdeUltimaMarca minutos. No se enviará otra marca.")
                     return true
                 }
             }
@@ -72,7 +74,7 @@ object AttendanceManager {
             if (attendanceResponse.isSuccessful) {
                 prefs.edit().putString("ultimaMarcaAsistencia", marcaActual.toString()).apply()
                 val guardado = prefs.getString("ultimaMarcaAsistencia", "")
-                NotificationHelper.show(App.instance,"Última asistencia guardada","Valor guardado = $guardado")
+                NotificationHelper.show(App.instance,"Última asistencia guardada","Hora: $guardado")
             }
 
             attendanceResponse.isSuccessful

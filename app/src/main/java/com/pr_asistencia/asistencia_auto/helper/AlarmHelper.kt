@@ -47,14 +47,14 @@ object AlarmHelper {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
             alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
-            android.util.Log.d("Alarma(AlarmHelper).1", "Programada para: ${calendar.time}")
-            NotificationHelper.show(context,"Alarma(AlarmHelper).2","Su alarma se ha programado para: ${calendar.time}")
+            android.util.Log.d("Alarma.v1", "Programado para: ${calendar.time}")
+            NotificationHelper.show(context,"Alarma.2","Programado para: ${calendar.time}")
         }
         else
         {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
-            android.util.Log.d("Alarma(AlarmHelper).2", "Programada para: ${calendar.time}")
-            NotificationHelper.show(context,"Alarma(AlarmHelper).2","Su alarma se ha programado para: ${calendar.time}")
+            android.util.Log.d("Alarma.v2", "Programado para: ${calendar.time}")
+            NotificationHelper.show(context,"Alarma.2","Programado para: ${calendar.time}")
         }
     }
 

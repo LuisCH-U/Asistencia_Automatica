@@ -39,7 +39,7 @@ class BootReceiver : BroadcastReceiver() {
 
                 if (!alarmManager.canScheduleExactAlarms()) {
                     Log.d("BootReceiver", "No se pueden programar alarmas exactas: permiso no concedido")
-                    NotificationHelper.show(appContext, "Alarma(BootReceiver)", "No se pueden programar alarmas exactas. Falta permiso.")
+                    NotificationHelper.show(appContext, "BootReceiver", "No se pueden programar alarmas exactas. Falta permiso.")
                     return
                 }
             }
@@ -51,8 +51,8 @@ class BootReceiver : BroadcastReceiver() {
             val salidaSplit = salida.split(":")
 
             if (entradaSplit.size != 2 || salidaSplit.size != 2) {
-                Log.e("BootReceiver", "Formato de hora inválido: entrada=$entrada, salida=$salida")
-                NotificationHelper.show(appContext, "Error BootReceiver", "Formato de hora inválido: entrada=$entrada, salida=$salida")
+                Log.e("BootReceiver", "Formato de hora inválido: entrada: $entrada - salida: $salida")
+                NotificationHelper.show(appContext, "Error BootReceiver", "Formato de hora inválido: entrada: $entrada - salida: $salida")
                 return
             }
 
@@ -63,15 +63,15 @@ class BootReceiver : BroadcastReceiver() {
 
             if (entradaHora == null || entradaMinuto == null || salidaHora == null || salidaMinuto == null)
             {
-                Log.e("BootReceiver", "Hora inválida: entrada=$entrada, salida=$salida")
-                NotificationHelper.show(appContext,"Error BootReceiver","Hora inválida: entrada=$entrada, salida=$salida")
+                Log.e("BootReceiver", "Hora inválida: entrada: $entrada, salida: $salida")
+                NotificationHelper.show(appContext,"Error BootReceiver","Hora inválida: entrada: $entrada - salida: $salida")
                 return
             }
 
             AlarmHelper.programarAlarma(appContext, entradaHora, entradaMinuto, 100)
             AlarmHelper.programarAlarma(appContext, salidaHora, salidaMinuto, 200)
 
-            Log.d("BootReceiver", "Alarmas programadas al reiniciar: entrada=$entrada, salida=$salida")
+            Log.d("BootReceiver", "Alarmas programadas al reiniciar: entrada: $entrada - salida: $salida")
             NotificationHelper.show(appContext, "Alarma(BootReceiver)", "Alarmas programadas al reiniciar - Entrada: $entrada - Salida: $salida")
         }
         catch (e: Exception) {

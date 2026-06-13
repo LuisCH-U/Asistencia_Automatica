@@ -1,6 +1,7 @@
 package com.pr_asistencia.asistencia_auto.manager
 
 import com.pr_asistencia.asistencia_auto.App
+import com.pr_asistencia.asistencia_auto.helper.NotificationHelper
 import com.pr_asistencia.asistencia_auto.models.AttendanceRequest
 import com.pr_asistencia.asistencia_auto.models.LoginRequest
 import com.pr_asistencia.asistencia_auto.network.RetrofitClient
@@ -15,11 +16,18 @@ object AttendanceManager {
         return try {
 
             val prefs = App.instance.securePrefs()
-           //val marcaActual = OffsetDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm"))
-           //val ultimaMarca = prefs.getString("ultimaMarcaAsistencia", "")
-           //if (ultimaMarca == marcaActual) {
-           //    return true
-           //}
+            val marcaActual = OffsetDateTime.now()
+            val ultimaMarca = prefs.getString("ultimaMarcaAsistencia", "")
+            NotificationHelper.show(App.instance, "Ultima Asistenicia", "Ultima marca = $ultimaMarca, Marca actual = $marcaActual")
+            if (!ultimaMarca.isNullOrBlank()) {
+                val ultimaMarcaFecha = OffsetDateTime.parse(ultimaMarca)
+                val minutosDesdeUltimaMarca = java.time.Duration.between(ultimaMarcaFecha, marcaActual).toMinutes()
+
+                if (minutosDesdeUltimaMarca in 0..30) {
+                    NotificationHelper.show(App.instance, "Asistencia duplicada", "Ya se marcó asistencia hace $minutosDesdeUltimaMarca minutos. No se enviará otra marca.")
+                    return true
+                }
+            }
 
             val tenant = prefs.getString("tenant", "") ?: ""
             val user = prefs.getString("user", "") ?: ""
@@ -60,6 +68,13 @@ object AttendanceManager {
                                              longitude = null
                                          )
                                      )
+
+            if (attendanceResponse.isSuccessful) {
+                prefs.edit().putString("ultimaMarcaAsistencia", marcaActual.toString()).apply()
+                val guardado = prefs.getString("ultimaMarcaAsistencia", "")
+                NotificationHelper.show(App.instance,"Última asistencia guardada","Valor guardado = $guardado")
+            }
+
             attendanceResponse.isSuccessful
 
         } catch (e: Exception)

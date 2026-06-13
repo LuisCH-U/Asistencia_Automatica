@@ -197,16 +197,15 @@ class HomeActivity : AppCompatActivity() {
 
         AlarmHelper.programarAlarma(this, salidaSplit[0].toInt(), salidaSplit[1].toInt(), 200)
 
-        NotificationHelper.show(applicationContext,"Asistencia","Configuración guardada - Entrada=$entrada - Salida=$salida")
+        NotificationHelper.show(applicationContext,"Asistencia","Configuración guardada - Entrada: $entrada - Salida: $salida")
         Toast.makeText(this, "Configuración guardada", Toast.LENGTH_LONG).show()
     }
 
     private fun cargarConfiguracion()
     {
-
         val prefs = getSharedPreferences("config", MODE_PRIVATE)
-        txtHoraEntrada.text = prefs.getString("horaEntrada", "08:00")
-        txtHoraSalida.text = prefs.getString("horaSalida", "18:00")
+        txtHoraEntrada.text = prefs.getString("horaEntrada", "08:25")
+        txtHoraSalida.text = prefs.getString("horaSalida", "18:36")
         switchAutomatico.isChecked = prefs.getBoolean("automatico", true)
         switchActivo.isChecked = prefs.getBoolean("activo", true)
         checkLunes.isChecked = prefs.getBoolean("lunes", true)

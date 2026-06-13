@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Asistencia_Auto</string>
-    <string name="configuraci_n_asis">Configuración Asis</string>
+    <string name="app_name" translatable="false">Asistencia_Auto</string>
+    <string name="configuraci_n_asis" translatable="false">Configuración Asis</string>
 </resources>

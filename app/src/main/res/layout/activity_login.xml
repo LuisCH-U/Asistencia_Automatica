@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
     <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="26dp">
 
         <TextView
-                android:layout_width="340dp"
+                android:layout_width="372dp"
                 android:layout_height="match_parent"
                 android:text="Asistencia Automática"
                 android:textSize="30sp"
@@ -20,13 +20,13 @@
         />
 
         <Space
-                android:layout_width="340dp"
+                android:layout_width="372dp"
                 android:layout_height="35dp"
         />
 
         <EditText
                 android:id="@+id/etTenant"
-                android:layout_width="340dp"
+                android:layout_width="372dp"
                 android:layout_height="wrap_content"
                 android:hint="Enterprise"
                 android:text="inlearning"
@@ -34,26 +34,26 @@
         />
 
         <Space
-                android:layout_width="340dp"
+                android:layout_width="372dp"
                 android:layout_height="25dp"
         />
 
         <EditText
                 android:id="@+id/etUser"
-                android:layout_width="340dp"
+                android:layout_width="372dp"
                 android:layout_height="wrap_content"
                 android:hint="Usuario"
                 android:textAlignment="center"
         />
 
         <Space
-                android:layout_width="340dp"
+                android:layout_width="372dp"
                 android:layout_height="25dp"
         />
 
         <EditText
                 android:id="@+id/etPassword"
-                android:layout_width="340dp"
+                android:layout_width="372dp"
                 android:layout_height="wrap_content"
                 android:hint="Contraseña"
                 android:autofillHints="password"
@@ -62,13 +62,13 @@
         />
 
         <Space
-                android:layout_width="340dp"
+                android:layout_width="372dp"
                 android:layout_height="30dp"
         />
 
         <Button
                 android:id="@+id/btnLogin"
-                android:layout_width="340dp"
+                android:layout_width="372dp"
                 android:layout_height="wrap_content"
                 android:text="Iniciar sesión"
                 android:backgroundTint="#00BCD4"
@@ -78,12 +78,12 @@
         />
 
         <Space
-                android:layout_width="340dp"
+                android:layout_width="372dp"
                 android:layout_height="25dp"
         />
 
         <ImageView
-                android:layout_width="340dp"
+                android:layout_width="372dp"
                 android:layout_height="294dp"
                 android:layout_marginBottom="@dimen/cardview_default_radius"
                 android:foreground="@drawable/common_google_signin_btn_icon_dark"

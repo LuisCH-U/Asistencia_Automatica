@@ -10,7 +10,7 @@
             android:padding="24dp">
 
         <TextView
-                android:layout_width="347dp"
+                android:layout_width="368dp"
                 android:layout_height="wrap_content"
                 android:text="@string/configuraci_n_asis"
                 android:textSize="30sp"
@@ -92,7 +92,7 @@
         />
 
         <TextView
-                android:layout_width="347dp"
+                android:layout_width="368dp"
                 android:layout_height="wrap_content"
                 android:text="Días Activos"
                 android:textStyle="bold"

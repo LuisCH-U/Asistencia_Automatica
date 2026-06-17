@@ -19,14 +19,16 @@ object AttendanceManager {
             val marcaActual = OffsetDateTime.now()
             val ultimaMarca = prefs.getString("ultimaMarcaAsistencia", "")
 
-            NotificationHelper.show(App.instance, "Ultima Asistenicia", "Ultima: $ultimaMarca, Actual: $marcaActual")
+            NotificationHelper.show(App.instance, "Asistencia automática", "Anterior: $ultimaMarca - Actual: $marcaActual")
 
-            if (!ultimaMarca.isNullOrBlank()) {
+            if (!ultimaMarca.isNullOrBlank())
+            {
                 val ultimaMarcaFecha = OffsetDateTime.parse(ultimaMarca)
                 val minutosDesdeUltimaMarca = java.time.Duration.between(ultimaMarcaFecha, marcaActual).toMinutes()
 
-                if (minutosDesdeUltimaMarca in 0..30) {
-                    NotificationHelper.show(App.instance, "Duplicado", "Ya se marcó asistencia hace $minutosDesdeUltimaMarca minutos. No se enviará otra marca.")
+                if (minutosDesdeUltimaMarca in 0..30)
+                {
+                    NotificationHelper.show(App.instance, "Asistencia automática", "Asistencia registrada hace $minutosDesdeUltimaMarca minutos.")
                     return true
                 }
             }
@@ -35,14 +37,29 @@ object AttendanceManager {
             val user = prefs.getString("user", "") ?: ""
             val password = prefs.getString("password", "") ?: ""
             val loginResponse = RetrofitClient.api.login(
-                                    LoginRequest(
-                                        tenantName = tenant,
-                                        userNameOrEmailAddress = user,
-                                        password = password,
-                                        rememberClient = false
-                                    )
-                                )
+                LoginRequest(
+                    tenantName = tenant,
+                    userNameOrEmailAddress = user,
+                    password = password,
+                    rememberClient = false)
+            )
 
+            if (loginResponse.code() == 401)
+            {
+                val nuevoToken = reLogin()
+                if (nuevoToken != null)
+                {
+                    return marcarAsistencia()
+                }
+                return false
+            }
+
+            if (!loginResponse.isSuccessful)
+            {
+                return false
+            }
+
+            /*
             if (!loginResponse.isSuccessful)
             {
                 return false
@@ -50,12 +67,11 @@ object AttendanceManager {
             else if(loginResponse.code() == 401)
             {
                 val nuevoToken = reLogin()
-
                 if(nuevoToken != null)
                 {
                     return marcarAsistencia()
                 }
-            }
+            }*/
 
             val token = loginResponse.body()?.result?.accessToken?: return false
 
@@ -73,8 +89,8 @@ object AttendanceManager {
 
             if (attendanceResponse.isSuccessful) {
                 prefs.edit().putString("ultimaMarcaAsistencia", marcaActual.toString()).apply()
-                val guardado = prefs.getString("ultimaMarcaAsistencia", "")
-                NotificationHelper.show(App.instance,"Última asistencia guardada","Hora: $guardado")
+                val saveAsistance = prefs.getString("ultimaMarcaAsistencia", "")
+                NotificationHelper.show(App.instance,"Asistencia automática","Hora: $saveAsistance")
             }
 
             attendanceResponse.isSuccessful

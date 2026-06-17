@@ -2,6 +2,7 @@ package com.pr_asistencia.asistencia_auto
 
 import android.annotation.SuppressLint
 import android.app.AlarmManager
+import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.os.Build
@@ -18,6 +19,7 @@ import com.pr_asistencia.asistencia_auto.helper.AlarmHelper
 import androidx.core.content.edit
 import com.pr_asistencia.asistencia_auto.activities.ListActivity
 import com.pr_asistencia.asistencia_auto.helper.NotificationHelper
+import com.pr_asistencia.asistencia_auto.receiver.AttendanceReceiver
 
 @SuppressLint("UseSwitchCompatOrMaterialCode")
 class HomeActivity : AppCompatActivity() {
@@ -65,18 +67,28 @@ class HomeActivity : AppCompatActivity() {
         btnVerAsistencias = findViewById(R.id.btnVerAsistencia)
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion)
 
-        txtHoraEntrada.setOnClickListener { seleccionarHora(txtHoraEntrada) }
-        txtHoraSalida.setOnClickListener { seleccionarHora(txtHoraSalida) }
+        txtHoraEntrada.setOnClickListener {
+            seleccionarHora(txtHoraEntrada)
+        }
+        txtHoraSalida.setOnClickListener {
+            seleccionarHora(txtHoraSalida)
+        }
 
-        btnGuardar.setOnClickListener { guardarConfiguracion() }
-        btnMarcarAhora.setOnClickListener { marcarManual() }
+        btnGuardar.setOnClickListener{
+            guardarConfiguracion()
+        }
+        btnMarcarAhora.setOnClickListener {
+            marcarManual()
+        }
 
         btnVerAsistencias.setOnClickListener {
             val intent = Intent(this, ListActivity::class.java)
             startActivity(intent)
         }
 
-        btnCerrarSesion.setOnClickListener { cerrarSesion() }
+        btnCerrarSesion.setOnClickListener {
+            cerrarSesion()
+        }
 
         solicitarPermisoExactAlarm()
 
@@ -88,12 +100,9 @@ class HomeActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
 
-            if (!alarmManager.canScheduleExactAlarms()) {
-
-                val intent = Intent(
-                    Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM
-                )
-
+            if (!alarmManager.canScheduleExactAlarms())
+            {
+                val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
                 startActivity(intent)
             }
         }
@@ -110,20 +119,10 @@ class HomeActivity : AppCompatActivity() {
     @SuppressLint("DefaultLocale")
     private fun seleccionarHora(textView: TextView)
     {
-
         val calendar = Calendar.getInstance()
-
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
-
         val minute = calendar.get(Calendar.MINUTE)
-
-        TimePickerDialog(
-            this,
-            { _, h, m -> textView.text = String.format("%02d:%02d", h, m) },
-            hour,
-            minute,
-            true
-        ).show()
+        TimePickerDialog(this, { _, h, m -> textView.text = String.format("%02d:%02d", h, m) }, hour, minute, true).show()
     }
 
     private fun guardarConfiguracion()
@@ -147,6 +146,7 @@ class HomeActivity : AppCompatActivity() {
         val securePrefs = App.instance.securePrefs()
         val user = securePrefs.getString("user","") ?: ""
         val password = securePrefs.getString("password", "") ?: ""
+        val tenant = securePrefs.getString("tenant", "InLearning") ?: ""
 
         val data = hashMapOf<String, Any>(
             "horaEntrada" to txtHoraEntrada.text.toString(),
@@ -160,44 +160,29 @@ class HomeActivity : AppCompatActivity() {
             "viernes" to checkViernes.isChecked,
             "sabado" to checkSabado.isChecked,
             "domingo" to checkDomingo.isChecked,
-            "tenant" to "inlearning",
+            "tenant" to tenant,
             "user" to user,
             "password" to password
         )
 
         FirebaseManager
-            .guardarConfiguracion(
-                user,
-                data,
-                onSuccess = {
+            .guardarConfiguracion(user, data,
+                onSuccess = { Toast.makeText(this, "Guardado en Firebase", Toast.LENGTH_LONG).show() },
+            onError = {
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            })
 
-                    //val entrada = txtHoraEntrada.text.toString().split(":")
-
-                    //val salida = txtHoraSalida.text.toString().split(":")
-
-                    //WorkerScheduler.scheduleWorker(this,entrada[0].toInt(),entrada[1].toInt())
-
-                    //WorkerScheduler.scheduleWorker(this,salida[0].toInt(),salida[1].toInt())
-
-                    Toast.makeText(this, "Guardado en Firebase", Toast.LENGTH_LONG).show()
-                },
-                onError = {
-                    Toast.makeText(this, it, Toast.LENGTH_LONG).show()
-                }
-            )
         val entrada =  txtHoraEntrada.text.toString()
-
         val salida = txtHoraSalida.text.toString()
-
         val entradaSplit = entrada.split(":")
-
         val salidaSplit = salida.split(":")
 
-        AlarmHelper.programarAlarma(this, entradaSplit[0].toInt(), entradaSplit[1].toInt(), 100)
+        limpiarAlarmas()
 
+        AlarmHelper.programarAlarma(this, entradaSplit[0].toInt(), entradaSplit[1].toInt(), 100)
         AlarmHelper.programarAlarma(this, salidaSplit[0].toInt(), salidaSplit[1].toInt(), 200)
 
-        NotificationHelper.show(applicationContext,"Asistencia","Configuración guardada - Entrada: $entrada - Salida: $salida")
+        NotificationHelper.show(applicationContext,"Asistencia automática","La configuración se guardó correctamente. - Entrada: $entrada - Salida: $salida")
         Toast.makeText(this, "Configuración guardada", Toast.LENGTH_LONG).show()
     }
 
@@ -229,21 +214,37 @@ class HomeActivity : AppCompatActivity() {
 
             if (ok) {
                 Toast.makeText(this@HomeActivity, "Asistencia marcada", Toast.LENGTH_LONG).show()
-                NotificationHelper.show(applicationContext,"Asistencia","Asistencia marcada - Manual")
+                NotificationHelper.show(applicationContext,"Asistencia automática","Tu asistencia se registró correctamente - Manual")
             } else {
                 Toast.makeText(this@HomeActivity, "Error al marcar", Toast.LENGTH_LONG).show()
-                NotificationHelper.show(applicationContext,"Asistencia","Error al marcar - Manual")
+                NotificationHelper.show(applicationContext,"Asistencia automática","Error al registrar tu asistencia - Manual")
             }
         }
     }
 
-    private fun cerrarSesion() {
+    private fun cerrarSesion()
+    {
 
         val prefs = App.instance.securePrefs()
 
         prefs.edit().clear().apply()
 
         finish()
+    }
+
+    private fun limpiarAlarmas()
+    {
+
+        val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+
+        listOf(100,200).forEach { tipo ->
+
+            val intent = Intent(this, AttendanceReceiver::class.java)
+
+            val pendingIntent = PendingIntent.getBroadcast(this, tipo, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+
+            alarmManager.cancel(pendingIntent)
+        }
     }
 
     /*

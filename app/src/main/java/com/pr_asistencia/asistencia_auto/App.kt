@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.pr_asistencia.asistencia_auto
 
 import android.app.Application

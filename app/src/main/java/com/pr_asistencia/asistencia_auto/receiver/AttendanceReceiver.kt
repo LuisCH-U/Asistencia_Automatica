@@ -23,6 +23,8 @@ class AttendanceReceiver : BroadcastReceiver() {
     {
         val tipo = intent.getIntExtra("tipo", 0)
         val now = Date()
+        val ahora = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale("es", "PE")).format(Date())
+        val pendingResult = goAsync()
 
         CoroutineScope(Dispatchers.IO).launch {
             try
@@ -32,36 +34,11 @@ class AttendanceReceiver : BroadcastReceiver() {
                 val horaEntrada = prefs.getString("horaEntrada", "08:25")
                 val horaSalida = prefs.getString("horaSalida", "18:35")
 
-                if (tipo == 100)
-                {
-                    val entrada = horaEntrada!!.split(":")
-                    AlarmHelper.programarAlarma(context,entrada[0].toInt(),entrada[1].toInt(),100)
-                    //NotificationHelper.show(context,"Entrada - AttendanceReceiver","Asistencia programada correctamente: ${entrada[0]}:${entrada[1]}")
-                }
-                else if (tipo == 200)
-                {
-                    val salida = horaSalida!!.split(":")
-                    AlarmHelper.programarAlarma(context,salida[0].toInt(),salida[1].toInt(),200)
-                    //NotificationHelper.show(context,"Salida - AttendanceReceiver","Asistencia programada correctamente: ${salida[0]}:${salida[1]}")
-                }
-
                 val activo = prefs.getBoolean("activo", false)
                 val automatico = prefs.getBoolean("automatico", false)
 
                 val calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Lima"))
                 val dayZone = calendar.get(Calendar.DAY_OF_WEEK)
-
-                /*
-                val diaActivo = when(dayZone) {
-                    Calendar.MONDAY -> prefs.getBoolean("lunes", true)
-                    Calendar.TUESDAY -> prefs.getBoolean("martes", true)
-                    Calendar.WEDNESDAY -> prefs.getBoolean("miercoles", true)
-                    Calendar.THURSDAY -> prefs.getBoolean("jueves", true)
-                    Calendar.FRIDAY -> prefs.getBoolean("viernes", true)
-                    Calendar.SATURDAY -> prefs.getBoolean("sabado", false)
-                    Calendar.SUNDAY -> prefs.getBoolean("domingo", false)
-                    else -> false
-                }*/
 
                 val diaActivo = DayActive(dayZone, prefs)
 
@@ -73,7 +50,7 @@ class AttendanceReceiver : BroadcastReceiver() {
 
                 if (!activo || !automatico)
                 {
-                    Log.d("Inactivo","Asistencia marcada, solo pruebas tipo: $tipo - horaReal: $now")
+                    Log.d("Inactivo","Asistencia marcada, solo pruebas tipo: $tipo - horaReal: $ahora")
                     NotificationHelper.show(context,"Asistencia automática","No se marco tu asistencia.")
                     return@launch
                 }
@@ -81,18 +58,31 @@ class AttendanceReceiver : BroadcastReceiver() {
                 val ok = AttendanceManager.marcarAsistencia()
 
                 if (ok) {
-                    Log.d("Asistencia - OK", "Asistencia marcada correctamente - Tipo:$tipo, Hora: $now")
+                    Log.d("Asistencia - OK", "Asistencia marcada correctamente - Tipo:$tipo, Hora: $ahora")
                     NotificationHelper.show(context, "Asistencia automática", "Tu asistencia se registró correctamente.")
                 } else {
-                    Log.d("Asistencia - Error", "Error al marcar asistencia - Tipo: $tipo, Hora: $now")
+                    Log.d("Asistencia - Error", "Error al marcar asistencia - Tipo: $tipo, Hora: $ahora")
                     NotificationHelper.show(context, "Asistencia automática", "No fue posible registrar la asistencia. Se intentará nuevamente.")
                 }
 
-            } catch (e: Exception)
-            {
+                if (tipo == 100) {
+                    val entrada = horaEntrada!!.split(":")
+                    AlarmHelper.programarAlarma(context,entrada[0].toInt(),entrada[1].toInt(),100)
+                    //NotificationHelper.show(context,"Entrada - AttendanceReceiver","Asistencia programada correctamente: ${entrada[0]}:${entrada[1]}")
+                }
+                else if (tipo == 200) {
+                    val salida = horaSalida!!.split(":")
+                    AlarmHelper.programarAlarma(context,salida[0].toInt(),salida[1].toInt(),200)
+                    //NotificationHelper.show(context,"Salida - AttendanceReceiver","Asistencia programada correctamente: ${salida[0]}:${salida[1]}")
+                }
+
+            } catch (e: Exception) {
                 Log.e("Asistencia - Ex", "Error en AttendanceReceiver", e)
                 NotificationHelper.show(context, "Asistencia automática", e.message ?: "Error desconocido")
                 e.printStackTrace()
+            }
+            finally {
+                pendingResult.finish()
             }
         }
     }

@@ -58,6 +58,28 @@ object AttendanceManager {
             {
                 return false
             }
+            
+            val token = loginResponse.body()?.result?.accessToken?: return false
+
+            val attendanceResponse = RetrofitClient.api.createAttendance(
+                "Bearer $token",
+                AttendanceRequest(
+                    attendance = true,
+                    comments = null,
+                    costCenterId = null,
+                    issued = OffsetDateTime.now().toString(),
+                    latitude = null,
+                    longitude = null
+                )
+            )
+
+            if (attendanceResponse.isSuccessful) {
+                prefs.edit().putString("ultimaMarcaAsistencia", marcaActual.toString()).apply()
+                val saveAsistance = prefs.getString("ultimaMarcaAsistencia", "")
+                NotificationHelper.show(App.instance,"Asistencia automática","Hora: $saveAsistance")
+            }
+
+            attendanceResponse.isSuccessful
 
             /*
             if (!loginResponse.isSuccessful)
@@ -72,28 +94,6 @@ object AttendanceManager {
                     return marcarAsistencia()
                 }
             }*/
-
-            val token = loginResponse.body()?.result?.accessToken?: return false
-
-            val attendanceResponse = RetrofitClient.api.createAttendance(
-                                         "Bearer $token",
-                                         AttendanceRequest(
-                                             attendance = true,
-                                             comments = null,
-                                             costCenterId = null,
-                                             issued = OffsetDateTime.now().toString(),
-                                             latitude = null,
-                                             longitude = null
-                                         )
-                                     )
-
-            if (attendanceResponse.isSuccessful) {
-                prefs.edit().putString("ultimaMarcaAsistencia", marcaActual.toString()).apply()
-                val saveAsistance = prefs.getString("ultimaMarcaAsistencia", "")
-                NotificationHelper.show(App.instance,"Asistencia automática","Hora: $saveAsistance")
-            }
-
-            attendanceResponse.isSuccessful
 
         } catch (e: Exception)
         {

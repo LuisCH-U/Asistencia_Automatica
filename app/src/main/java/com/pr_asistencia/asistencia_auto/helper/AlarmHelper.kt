@@ -53,7 +53,21 @@ object AlarmHelper {
 
         val fecha = sdf.format(calendar.time).replaceFirstChar {it.uppercase()}
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            val alarmInfo = AlarmManager.AlarmClockInfo(calendar.timeInMillis, pendingIntent)
+            alarmManager.setAlarmClock(alarmInfo, pendingIntent)
+            android.util.Log.d("Alarma.v1", "Programado para: $fecha - Tipo: $requestCode")
+            NotificationHelper.show(context, "Asistencia automática", "Tu asistencia fue programada para: $fecha - $openOrExit")
+        }
+        else
+        {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+            android.util.Log.d("Alarma.v2", "Programado para: $fecha - Tipo: $requestCode")
+            NotificationHelper.show(context, "Asistencia automática", "Tu asistencia fue programada para: $fecha - $openOrExit")
+        }*/
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M || Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP)
         {
             alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
             android.util.Log.d("Alarma.v1", "Programado para: ${calendar.time} - Tipo: $requestCode")
@@ -72,18 +86,6 @@ object AlarmHelper {
         while (true)
         {
             val day = calendar.get(Calendar.DAY_OF_WEEK)
-            /*
-            val activo = when(day) {
-                Calendar.MONDAY -> prefs.getBoolean("lunes", true)
-                Calendar.TUESDAY -> prefs.getBoolean("martes", true)
-                Calendar.WEDNESDAY -> prefs.getBoolean("miercoles", true)
-                Calendar.THURSDAY -> prefs.getBoolean("jueves", true)
-                Calendar.FRIDAY -> prefs.getBoolean("viernes", true)
-                Calendar.SATURDAY -> prefs.getBoolean("sabado", false)
-                Calendar.SUNDAY -> prefs.getBoolean("domingo", false)
-                else -> false
-            }
-            */
 
             val activeday = DayActive(day, prefs)
             if (activeday)

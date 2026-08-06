@@ -145,7 +145,6 @@ class HomeActivity : AppCompatActivity() {
 
         val securePrefs = App.instance.securePrefs()
         val user = securePrefs.getString("user","") ?: ""
-        val password = securePrefs.getString("password", "") ?: ""
         val tenant = securePrefs.getString("tenant", "InLearning") ?: ""
 
         val data = hashMapOf<String, Any>(
@@ -161,8 +160,7 @@ class HomeActivity : AppCompatActivity() {
             "sabado" to checkSabado.isChecked,
             "domingo" to checkDomingo.isChecked,
             "tenant" to tenant,
-            "user" to user,
-            "password" to password
+            "user" to user
         )
 
         FirebaseManager
@@ -246,12 +244,4 @@ class HomeActivity : AppCompatActivity() {
             alarmManager.cancel(pendingIntent)
         }
     }
-
-    /*
-    private fun iniciarWorker() {
-
-        val workRequest = PeriodicWorkRequestBuilder<AttendanceWorker>(15, TimeUnit.MINUTES).build()
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork("attendanceWorker", ExistingPeriodicWorkPolicy.UPDATE, workRequest)
-    }
-    */
 }

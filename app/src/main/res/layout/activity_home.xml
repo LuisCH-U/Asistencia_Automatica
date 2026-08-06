@@ -88,6 +88,14 @@
                 android:buttonTint="@color/brand_primary"
                 tools:ignore="UseSwitchCompatOrMaterialCode,HardcodedText"/>
 
+        <Switch
+                android:id="@+id/switchFeriados"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ignorar feriados nacionales"
+                android:buttonTint="@color/brand_primary"
+                tools:ignore="UseSwitchCompatOrMaterialCode,HardcodedText"/>
+
         <Space
                 android:layout_width="match_parent"
                 android:layout_height="15dp"/>

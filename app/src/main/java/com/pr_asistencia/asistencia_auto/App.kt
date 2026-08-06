@@ -5,6 +5,8 @@ package com.pr_asistencia.asistencia_auto
 import android.app.Application
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
+import com.pr_asistencia.asistencia_auto.helper.HolidayHelper
+import java.util.Calendar
 
 class App : Application() {
 
@@ -16,6 +18,15 @@ class App : Application() {
         super.onCreate()
 
         instance = this
+
+        refreshHolidaysIfNeeded()
+    }
+
+    private fun refreshHolidaysIfNeeded() {
+        val year = Calendar.getInstance().get(Calendar.YEAR)
+        if (HolidayHelper.cachedYear(this) != year) {
+            HolidayHelper.refreshHolidays(this, year)
+        }
     }
 
     fun securePrefs() =

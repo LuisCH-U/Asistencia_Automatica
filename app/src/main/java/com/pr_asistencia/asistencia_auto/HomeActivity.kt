@@ -28,6 +28,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var txtHoraSalida: TextView
     private lateinit var switchAutomatico: Switch
     private lateinit var switchActivo: Switch
+    private lateinit var switchFeriados: Switch
     private lateinit var btnGuardar: Button
     private lateinit var btnMarcarAhora: Button
     private lateinit var btnVerAsistencias: Button
@@ -53,6 +54,7 @@ class HomeActivity : AppCompatActivity() {
 
         switchAutomatico = findViewById(R.id.switchAutomatico)
         switchActivo = findViewById(R.id.switchActivo)
+        switchFeriados = findViewById(R.id.switchFeriados)
 
         checkLunes = findViewById(R.id.checkLunes)
         checkMartes = findViewById(R.id.checkMartes)
@@ -134,6 +136,7 @@ class HomeActivity : AppCompatActivity() {
             ).putString("horaSalida",txtHoraSalida.text.toString()
             ).putBoolean("automatico",switchAutomatico.isChecked
             ).putBoolean("activo",switchActivo.isChecked
+            ).putBoolean("feriadosActivos",switchFeriados.isChecked
             ).putBoolean("lunes",checkLunes.isChecked
             ).putBoolean("martes",checkMartes.isChecked
             ).putBoolean("miercoles",checkMiercoles.isChecked
@@ -152,6 +155,7 @@ class HomeActivity : AppCompatActivity() {
             "horaSalida" to txtHoraSalida.text.toString(),
             "automatico" to switchAutomatico.isChecked,
             "activo" to switchActivo.isChecked,
+            "feriadosActivos" to switchFeriados.isChecked,
             "lunes" to checkLunes.isChecked,
             "martes" to checkMartes.isChecked,
             "miercoles" to checkMiercoles.isChecked,
@@ -191,6 +195,7 @@ class HomeActivity : AppCompatActivity() {
         txtHoraSalida.text = prefs.getString("horaSalida", "18:36")
         switchAutomatico.isChecked = prefs.getBoolean("automatico", true)
         switchActivo.isChecked = prefs.getBoolean("activo", true)
+        switchFeriados.isChecked = prefs.getBoolean("feriadosActivos", true)
         checkLunes.isChecked = prefs.getBoolean("lunes", true)
         checkMartes.isChecked = prefs.getBoolean("martes", true)
         checkMiercoles.isChecked = prefs.getBoolean("miercoles", true)

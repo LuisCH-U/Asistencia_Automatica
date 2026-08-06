@@ -46,7 +46,7 @@ object AlarmHelper {
         {
             calendar.add(Calendar.DAY_OF_MONTH, 1)
             val prefs = context.getSharedPreferences("config", Context.MODE_PRIVATE)
-            siguienteDiaLaborable(calendar, prefs)
+            siguienteDiaLaborable(calendar, prefs, context)
         }
 
         val sdf = SimpleDateFormat("EEEE dd/MM/yyyy HH:mm:ss", Locale("es", "PE"))
@@ -81,13 +81,15 @@ object AlarmHelper {
         }
     }
 
-    private fun siguienteDiaLaborable( calendar: Calendar, prefs: SharedPreferences)
+    private fun siguienteDiaLaborable(calendar: Calendar, prefs: SharedPreferences, context: Context)
     {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         while (true)
         {
             val day = calendar.get(Calendar.DAY_OF_WEEK)
+            val date = sdf.format(calendar.time)
 
-            val activeday = DayActive(day, prefs)
+            val activeday = DayActive(day, date, prefs, context)
             if (activeday)
             {
                 break

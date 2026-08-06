@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.pr_asistencia.asistencia_auto.helper.AlarmHelper
+import com.pr_asistencia.asistencia_auto.helper.HolidayHelper
 import com.pr_asistencia.asistencia_auto.helper.NotificationHelper
 import com.pr_asistencia.asistencia_auto.helper.dayHelper.DayActive
 import com.pr_asistencia.asistencia_auto.manager.AttendanceManager
@@ -37,12 +38,18 @@ class AttendanceReceiver : BroadcastReceiver() {
 
                 val calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Lima"))
                 val dayZone = calendar.get(Calendar.DAY_OF_WEEK)
+                val fechaHoy = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.time)
 
-                val diaActivo = DayActive(dayZone, prefs)
+                val diaActivo = DayActive(dayZone, fechaHoy, prefs, context)
 
                 if (!diaActivo) {
                     Log.d("Dia activo", "No se marcará asistencia.")
-                    NotificationHelper.show(context, "Asistencia automática", "Asistencia no programado para hoy.")
+                    val feriado = HolidayHelper.holidayName(context, fechaHoy)
+                    if (feriado != null) {
+                        NotificationHelper.show(context, "Asistencia automática", "Feriado: $feriado. No se marca asistencia.")
+                    } else {
+                        NotificationHelper.show(context, "Asistencia automática", "Asistencia no programado para hoy.")
+                    }
                     return@launch
                 }
 

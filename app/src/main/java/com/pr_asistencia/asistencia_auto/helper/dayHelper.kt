@@ -1,13 +1,15 @@
 package com.pr_asistencia.asistencia_auto.helper
 
+import android.content.Context
 import android.content.SharedPreferences
 import java.util.Calendar
 
 object dayHelper {
 
-    fun DayActive(day: Int, prefs: SharedPreferences) : Boolean
-    {
-        val activo = when(day) {
+    fun DayActive(day: Int, date: String, prefs: SharedPreferences, context: Context): Boolean {
+        if (HolidayHelper.isHoliday(context, date)) return false
+
+        val activo = when (day) {
             Calendar.MONDAY -> prefs.getBoolean("lunes", true)
             Calendar.TUESDAY -> prefs.getBoolean("martes", true)
             Calendar.WEDNESDAY -> prefs.getBoolean("miercoles", true)

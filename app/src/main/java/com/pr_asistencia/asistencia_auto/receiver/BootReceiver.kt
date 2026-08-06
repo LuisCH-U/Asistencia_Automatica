@@ -25,13 +25,13 @@ class BootReceiver : BroadcastReceiver() {
             val appContext = context.applicationContext
             val prefs = appContext.getSharedPreferences("config", Context.MODE_PRIVATE)
 
-//            val activo = prefs.getBoolean("activo", true)
-//            val automatico = prefs.getBoolean("automatico", true)
-//            if (!activo || !automatico) {
-//                Log.d("BootReceiver", "No se programan alarmas: activo=$activo, automatico=$automatico")
-//                NotificationHelper.show(appContext, "Alarma(BootReceiver)", "No se programan alarmas porque la asistencia automática está desactivada")
-//                return
-//            }
+            val activo = prefs.getBoolean("activo", true)
+            val automatico = prefs.getBoolean("automatico", true)
+            if (!activo || !automatico) {
+                Log.d("BootReceiver", "No se programan alarmas: activo=$activo, automatico=$automatico")
+                NotificationHelper.show(appContext, "Alarma(BootReceiver)", "No se programan alarmas porque la asistencia automática está desactivada")
+                return
+            }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
             {
@@ -78,15 +78,5 @@ class BootReceiver : BroadcastReceiver() {
             Log.e("BootReceiver", "Error al programar alarmas después del reinicio", e)
             NotificationHelper.show(context.applicationContext, "Error BootReceiver", e.message ?: "Error desconocido")
         }
-
-        //val prefs = context.getSharedPreferences("config",Context.MODE_PRIVATE)
-        //val entrada = prefs.getString("horaEntrada", "08:25") ?: "08:25"
-        //val salida = prefs.getString("horaSalida", "18:35") ?: "18:35"
-        //val entradaSplit = entrada.split(":")
-        //val salidaSplit = salida.split(":")
-        //AlarmHelper.programarAlarma(context, entradaSplit[0].toInt(), entradaSplit[1].toInt(), 100)
-        //AlarmHelper.programarAlarma(context, salidaSplit[0].toInt(), salidaSplit[1].toInt(), 200)
-        //Log.d("BootReceiver", "Alarma programada")
-        //NotificationHelper.show(context,"Alarma(BootReceiver)","Alarma programada")
     }
 }

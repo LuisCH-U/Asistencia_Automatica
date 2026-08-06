@@ -80,8 +80,11 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
 
                     val token = response.body()?.result?.accessToken
-
-                    guardarSesion(token!!)
+                    if (token.isNullOrBlank()) {
+                        Toast.makeText(this@LoginActivity, "Respuesta inválida del servidor", Toast.LENGTH_LONG).show()
+                        return@launch
+                    }
+                    guardarSesion(token)
 
                     Toast.makeText(this@LoginActivity, "Login correcto", Toast.LENGTH_LONG).show()
 

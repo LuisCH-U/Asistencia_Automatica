@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/brand_background"
+            android:fillViewport="true">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -13,19 +16,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Lista de Asistencias"
+                android:textColor="@color/brand_primary"
                 android:textAlignment="center"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:textSize="28sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText"/>
 
         <Space
                 android:layout_width="match_parent"
-                android:layout_height="24dp" />
+                android:layout_height="24dp"/>
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Fecha inicio"
-                android:textStyle="bold" />
+                android:textColor="@color/brand_text_secondary"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText"/>
 
         <EditText
                 android:id="@+id/datetime_inicio"
@@ -34,16 +41,22 @@
                 android:hint="YYYY-MM-DD"
                 android:inputType="date"
                 android:focusable="false"
-                android:clickable="true" />
+                android:clickable="true"
+                android:padding="12dp"
+                android:background="@color/brand_surface"
+                tools:ignore="HardcodedText"/>
+
         <Space
                 android:layout_width="match_parent"
-                android:layout_height="16dp" />
+                android:layout_height="16dp"/>
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Fecha fin"
-                android:textStyle="bold" />
+                android:textColor="@color/brand_text_secondary"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText"/>
 
         <EditText
                 android:id="@+id/datetime_fin"
@@ -52,22 +65,27 @@
                 android:hint="YYYY-MM-DD"
                 android:inputType="date"
                 android:focusable="false"
-                android:clickable="true" />
+                android:clickable="true"
+                android:padding="12dp"
+                android:background="@color/brand_surface"
+                tools:ignore="HardcodedText"/>
 
         <Space
                 android:layout_width="match_parent"
-                android:layout_height="16dp" />
+                android:layout_height="16dp"/>
 
         <Button
                 android:id="@+id/btn_filt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Buscar"
-                android:backgroundTint="#35B968"/>
+                android:backgroundTint="@color/brand_primary"
+                android:textColor="@color/brand_on_primary"
+                tools:ignore="HardcodedText"/>
 
         <Space
                 android:layout_width="match_parent"
-                android:layout_height="16dp" />
+                android:layout_height="16dp"/>
 
         <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -82,21 +100,27 @@
                         android:id="@+id/table_lista"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:stretchColumns="*" />
+                        android:stretchColumns="*"
+                        android:divider="@color/brand_divider"
+                        android:showDividers="middle"/>
 
             </ScrollView>
 
         </HorizontalScrollView>
+
         <Space
                 android:layout_width="match_parent"
-                android:layout_height="16dp" />
+                android:layout_height="16dp"/>
 
         <Button
                 android:id="@+id/btnVolver"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Volver"
-                android:backgroundTint="#974545"/>
+                android:backgroundTint="@color/brand_text_secondary"
+                android:textColor="@color/brand_on_primary"
+                tools:ignore="HardcodedText"/>
+
     </LinearLayout>
 
 </ScrollView>

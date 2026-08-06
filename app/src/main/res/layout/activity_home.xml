@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/brand_background"
+            android:fillViewport="true">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -10,26 +13,25 @@
             android:padding="24dp">
 
         <TextView
-                android:layout_width="368dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:text="@string/configuraci_n_asis"
-                android:textSize="30sp"
+                android:textColor="@color/brand_primary"
+                android:textSize="28sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:textAllCaps="false"
-        />
-        <Space
-                android:layout_width="match_parent"
-                android:layout_height="15dp"
-        />
+                android:textAllCaps="false"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hora Entrada"
+                android:textColor="@color/brand_text_secondary"
                 android:textSize="16sp"
                 android:textStyle="bold"
-        />
+                tools:ignore="HardcodedText"/>
 
         <TextView
                 android:id="@+id/txtHoraEntrada"
@@ -38,18 +40,19 @@
                 android:padding="16dp"
                 android:text="08:25"
                 android:textSize="22sp"
-                android:background="#FFC107"
+                android:textColor="@color/black"
+                android:background="@color/brand_accent"
                 tools:ignore="HardcodedText"/>
 
         <Space
                 android:layout_width="match_parent"
-                android:layout_height="15dp"
-        />
+                android:layout_height="15dp"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hora Salida"
+                android:textColor="@color/brand_text_secondary"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText"/>
@@ -61,143 +64,151 @@
                 android:padding="16dp"
                 android:text="18:35"
                 android:textSize="22sp"
-                android:background="#FFC107"
-        />
+                android:textColor="@color/black"
+                android:background="@color/brand_accent"
+                tools:ignore="HardcodedText"/>
 
         <Space
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-        />
+                android:layout_height="25dp"/>
 
         <Switch
                 android:id="@+id/switchAutomatico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Modo Automático"
-                android:backgroundTint="#4CAF50"
-                android:buttonTint="#8BC34A"
-        />
+                android:buttonTint="@color/brand_primary"
+                tools:ignore="UseSwitchCompatOrMaterialCode,HardcodedText"/>
 
         <Switch
                 android:id="@+id/switchActivo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Activar Asistencia"
-                android:buttonTint="#8BC34A"
-        />
+                android:buttonTint="@color/brand_primary"
+                tools:ignore="UseSwitchCompatOrMaterialCode,HardcodedText"/>
 
         <Space
                 android:layout_width="match_parent"
-                android:layout_height="15dp"
-        />
+                android:layout_height="15dp"/>
 
         <TextView
-                android:layout_width="368dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Días Activos"
-                android:textStyle="bold"
+                android:textColor="@color/brand_primary"
                 android:textSize="18sp"
-        />
+                android:textStyle="bold"
+                tools:ignore="HardcodedText"/>
 
         <CheckBox
                 android:id="@+id/checkLunes"
-                android:layout_width="95dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lunes"
-        />
+                android:buttonTint="@color/brand_primary"
+                tools:ignore="HardcodedText"/>
 
         <CheckBox
                 android:id="@+id/checkMartes"
-                android:layout_width="95dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Martes"
-        />
+                android:buttonTint="@color/brand_primary"
+                tools:ignore="HardcodedText"/>
+
         <CheckBox
                 android:id="@+id/checkMiercoles"
-                android:layout_width="95dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Miércoles"
-        />
+                android:buttonTint="@color/brand_primary"
+                tools:ignore="HardcodedText"/>
 
         <CheckBox
                 android:id="@+id/checkJueves"
-                android:layout_width="95dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Jueves"
-        />
+                android:buttonTint="@color/brand_primary"
+                tools:ignore="HardcodedText"/>
 
         <CheckBox
                 android:id="@+id/checkViernes"
-                android:layout_width="95dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Viernes"
-        />
+                android:buttonTint="@color/brand_primary"
+                tools:ignore="HardcodedText"/>
 
         <CheckBox
                 android:id="@+id/checkSabado"
-                android:layout_width="95dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sabado"
-        />
+                android:buttonTint="@color/brand_primary"
+                tools:ignore="HardcodedText"/>
 
         <CheckBox
                 android:id="@+id/checkDomingo"
-                android:layout_width="95dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Domingo"
-        />
+                android:buttonTint="@color/brand_primary"
+                tools:ignore="HardcodedText"/>
 
         <Space
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-        />
+                android:layout_height="30dp"/>
 
         <Button
                 android:id="@+id/btnVerAsistencia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ver Asistencias"
-                android:backgroundTint="#D2C64E"
-        />
+                android:backgroundTint="@color/brand_primary"
+                android:textColor="@color/brand_on_primary"
+                tools:ignore="HardcodedText"/>
 
         <Space
                 android:layout_width="match_parent"
-                android:layout_height="12dp"
-        />
+                android:layout_height="12dp"/>
 
         <Button
                 android:id="@+id/btnGuardar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Guardar Configuración"
-                android:backgroundTint="#009688"
-        />
+                android:backgroundTint="@color/brand_primary_light"
+                android:textColor="@color/brand_on_primary"
+                tools:ignore="HardcodedText"/>
 
         <Space
                 android:layout_width="match_parent"
-                android:layout_height="12dp"
-        />
+                android:layout_height="12dp"/>
 
         <Button
                 android:id="@+id/btnMarcarAhora"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Marcar Asistencia Ahora"
-                android:backgroundTint="#8BC34A"
-        />
+                android:backgroundTint="@color/brand_accent"
+                android:textColor="@color/black"
+                tools:ignore="HardcodedText"/>
 
         <Space
                 android:layout_width="match_parent"
-                android:layout_height="12dp"
-        />
+                android:layout_height="12dp"/>
 
         <Button
                 android:id="@+id/btnCerrarSesion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Cerrar Sesión"
-                android:backgroundTint="#BD5F57"
-        />
+                android:backgroundTint="@color/brand_danger"
+                android:textColor="@color/brand_on_primary"
+                tools:ignore="HardcodedText"/>
 
     </LinearLayout>
 

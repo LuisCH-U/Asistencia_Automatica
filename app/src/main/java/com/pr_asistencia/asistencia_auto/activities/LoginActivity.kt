@@ -30,11 +30,28 @@ class LoginActivity : AppCompatActivity() {
         etUser = findViewById(R.id.etUser)
         etPassword = findViewById(R.id.etPassword)
         btnLogin = findViewById(R.id.btnLogin)
+
+        animarLogo()
+
         verificarSesion()
 
         btnLogin.setOnClickListener {
             login()
         }
+    }
+
+    private fun animarLogo()
+    {
+        val logo = findViewById<android.widget.ImageView>(R.id.ivLogo)
+        logo.alpha = 0f
+        logo.scaleX = 0.7f
+        logo.scaleY = 0.7f
+        logo.animate()
+            .alpha(1f)
+            .scaleX(1f)
+            .scaleY(1f)
+            .setDuration(400)
+            .start()
     }
 
     private fun verificarSesion()

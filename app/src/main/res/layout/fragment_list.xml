@@ -116,6 +116,9 @@
                         android:textColor="@color/brand_on_primary"
                         android:textStyle="bold"
                         android:elevation="2dp"
+                        android:drawableStart="@drawable/ic_search"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/brand_on_primary"
                         tools:ignore="HardcodedText"/>
 
                 <ProgressBar
@@ -171,6 +174,9 @@
                 android:backgroundTint="@color/brand_text_secondary"
                 android:textColor="@color/brand_on_primary"
                 android:textStyle="bold"
+                android:drawableStart="@drawable/ic_arrow_back"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/brand_on_primary"
                 tools:ignore="HardcodedText"/>
 
     </LinearLayout>

@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             if (fragment != null) {
                 supportFragmentManager
                     .beginTransaction()
+                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .replace(R.id.fragmentContainer, fragment)
                     .commit()
                 true

@@ -19,7 +19,7 @@
                 android:id="@+id/ivLogo"
                 android:layout_width="@dimen/logo_size"
                 android:layout_height="@dimen/logo_size"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="40dp"
                 android:contentDescription="Logo Asis"
                 android:src="@mipmap/ic_launcher_round"/>
 
@@ -27,9 +27,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Asis"
+                android:text="@string/app_name"
                 android:textColor="@color/brand_primary"
-                android:textSize="32sp"
+                android:textSize="36sp"
                 android:textStyle="bold"/>
 
         <TextView
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="32dp"
-                android:text="Asistencia automática en tiempo real"
+                android:text="Asistencia automática, sin fricción"
                 android:textColor="@color/brand_text_secondary"
                 android:textSize="14sp"/>
 
@@ -45,67 +45,86 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/corner_radius_card"
-                app:cardElevation="2dp"
+                app:cardElevation="3dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/brand_divider"
-                app:cardBackgroundColor="@color/brand_surface"
-                android:layout_marginHorizontal="8dp">
+                app:cardBackgroundColor="@color/brand_surface">
 
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="@dimen/space_medium">
+                    android:padding="@dimen/space_large">
 
-                <EditText
-                        android:id="@+id/etTenant"
+                <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="56dp"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:hint="Enterprise"
-                        android:text="inlearning"
-                        android:textSize="16sp"
-                        android:textColor="@color/brand_text_primary"
-                        android:textColorHint="@color/brand_text_secondary"
-                        android:autofillHints="username"/>
+                        app:boxCornerRadiusTopStart="@dimen/corner_radius_input"
+                        app:boxCornerRadiusTopEnd="@dimen/corner_radius_input"
+                        app:boxCornerRadiusBottomStart="@dimen/corner_radius_input"
+                        app:boxCornerRadiusBottomEnd="@dimen/corner_radius_input">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etTenant"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="inlearning"
+                            android:autofillHints="username"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Space
                         android:layout_width="match_parent"
                         android:layout_height="16dp"/>
 
-                <EditText
-                        android:id="@+id/etUser"
+                <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="56dp"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:hint="Usuario"
-                        android:textSize="16sp"
-                        android:textColor="@color/brand_text_primary"
-                        android:textColorHint="@color/brand_text_secondary"
-                        android:autofillHints="username"
-                        android:inputType="text"/>
+                        app:boxCornerRadiusTopStart="@dimen/corner_radius_input"
+                        app:boxCornerRadiusTopEnd="@dimen/corner_radius_input"
+                        app:boxCornerRadiusBottomStart="@dimen/corner_radius_input"
+                        app:boxCornerRadiusBottomEnd="@dimen/corner_radius_input"
+                        app:startIconDrawable="@drawable/ic_login">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etUser"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:autofillHints="username"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Space
                         android:layout_width="match_parent"
                         android:layout_height="16dp"/>
 
-                <EditText
-                        android:id="@+id/etPassword"
+                <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="56dp"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:hint="Contraseña"
-                        android:textSize="16sp"
-                        android:textColor="@color/brand_text_primary"
-                        android:textColorHint="@color/brand_text_secondary"
-                        android:autofillHints="password"
-                        android:inputType="textPassword"/>
+                        app:boxCornerRadiusTopStart="@dimen/corner_radius_input"
+                        app:boxCornerRadiusTopEnd="@dimen/corner_radius_input"
+                        app:boxCornerRadiusBottomStart="@dimen/corner_radius_input"
+                        app:boxCornerRadiusBottomEnd="@dimen/corner_radius_input"
+                        app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:autofillHints="password"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Space
                         android:layout_width="match_parent"
                         android:layout_height="24dp"/>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnLogin"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
@@ -113,24 +132,38 @@
                         android:textAllCaps="false"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:letterSpacing="0.02"
-                        android:backgroundTint="@color/brand_primary"
-                        android:textColor="@color/brand_on_primary"
-                        android:elevation="4dp"
-                        tools:ignore="TextContrastCheck"/>
-
+                        app:cornerRadius="@dimen/corner_radius_button"
+                        app:icon="@drawable/ic_login"
+                        app:iconGravity="start"
+                        app:iconPadding="12dp"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <TextView
+        <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="32dp"
-                android:text="© 2026"
-                android:textColor="@color/brand_text_secondary"
-                android:textSize="12sp"
-                android:textAlignment="center"/>
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="24dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Created by"
+                    android:textColor="@color/brand_text_secondary"
+                    android:textSize="12sp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Luis CH. U."
+                    android:textColor="@color/brand_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

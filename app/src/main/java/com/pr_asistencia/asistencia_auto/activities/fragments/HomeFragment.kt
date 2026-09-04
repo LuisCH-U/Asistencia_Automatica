@@ -92,6 +92,7 @@ class HomeFragment : Fragment() {
         btnGuardar.setOnClickListener {
             guardarConfiguracion()
         }
+
         btnMarcarAhora.setOnClickListener {
             marcarManual()
         }

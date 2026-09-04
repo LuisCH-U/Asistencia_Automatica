@@ -61,6 +61,9 @@
                         android:backgroundTint="@color/brand_primary_light"
                         android:textColor="@color/brand_on_primary"
                         android:textStyle="bold"
+                        android:drawableStart="@drawable/ic_dark_mode"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/brand_on_primary"
                         tools:ignore="HardcodedText"/>
 
             </LinearLayout>
@@ -102,21 +105,41 @@
                         android:backgroundTint="@color/brand_danger"
                         android:textColor="@color/brand_on_primary"
                         android:textStyle="bold"
+                        android:drawableStart="@drawable/ic_logout"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/brand_on_primary"
                         tools:ignore="HardcodedText"/>
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-                android:id="@+id/txtVersion"
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
-                android:text="Asis v1.0"
-                android:textColor="@color/brand_text_secondary"
-                android:textSize="14sp"
-                android:textAlignment="center"
-                tools:ignore="HardcodedText"/>
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+            <TextView
+                    android:id="@+id/txtVersion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Asis v1.1"
+                    android:textColor="@color/brand_text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Created by Luis CH. U."
+                    android:textColor="@color/brand_text_secondary"
+                    android:textSize="14sp"
+                    tools:ignore="HardcodedText"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

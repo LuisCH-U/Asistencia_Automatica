@@ -18,10 +18,8 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.Asistencia_Auto" tools:ignore="MissingClass">
 
-        <activity android:name=".HomeActivity" android:exported="false"/>
         <activity android:name=".activities.MainActivity" android:exported="false"/>
         <receiver android:name=".receiver.AttendanceReceiver" android:enabled="true" android:exported="false"/>
-        <activity android:name=".activities.ListActivity" android:exported="false"/>
         <activity android:name=".activities.LoginActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

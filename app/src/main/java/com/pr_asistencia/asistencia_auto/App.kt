@@ -3,6 +3,7 @@
 package com.pr_asistencia.asistencia_auto
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.pr_asistencia.asistencia_auto.helper.HolidayHelper
@@ -19,7 +20,23 @@ class App : Application() {
 
         instance = this
 
+        aplicarTema()
         refreshHolidaysIfNeeded()
+    }
+
+    private fun aplicarTema() {
+        val prefs = getSharedPreferences("config", MODE_PRIVATE)
+        val tieneOverride = prefs.contains("darkMode")
+
+        if (!tieneOverride) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        } else {
+            val darkMode = prefs.getBoolean("darkMode", false)
+            AppCompatDelegate.setDefaultNightMode(
+                if (darkMode) AppCompatDelegate.MODE_NIGHT_YES
+                else AppCompatDelegate.MODE_NIGHT_NO
+            )
+        }
     }
 
     private fun refreshHolidaysIfNeeded() {

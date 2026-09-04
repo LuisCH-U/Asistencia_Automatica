@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                       xmlns:app="http://schemas.android.com/apk/res-auto"
+                                       xmlns:tools="http://schemas.android.com/tools"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="match_parent"
+                                       android:background="@color/brand_background"
+                                       android:fillViewport="true">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_screen_horizontal">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:text="Configuración"
+                android:textColor="@color/brand_primary"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                tools:ignore="HardcodedText"/>
+
+        <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/brand_divider"
+                app:cardBackgroundColor="@color/brand_surface">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/space_medium">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tema"
+                        android:textColor="@color/brand_primary"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+
+                <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="12dp"/>
+
+                <Button
+                        android:id="@+id/btnChangeTheme"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="Alternar modo claro/oscuro"
+                        android:backgroundTint="@color/brand_primary_light"
+                        android:textColor="@color/brand_on_primary"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/brand_divider"
+                app:cardBackgroundColor="@color/brand_surface">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/space_medium">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cuenta"
+                        android:textColor="@color/brand_primary"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+
+                <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="12dp"/>
+
+                <Button
+                        android:id="@+id/btnCerrarSesion"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="Cerrar Sesión"
+                        android:backgroundTint="@color/brand_danger"
+                        android:textColor="@color/brand_on_primary"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+                android:id="@+id/txtVersion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:text="Asis v1.0"
+                android:textColor="@color/brand_text_secondary"
+                android:textSize="14sp"
+                android:textAlignment="center"
+                tools:ignore="HardcodedText"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

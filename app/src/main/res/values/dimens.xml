@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="corner_radius_card">16dp</dimen>
+    <dimen name="corner_radius_button">28dp</dimen>
+    <dimen name="corner_radius_input">12dp</dimen>
+    <dimen name="margin_screen_horizontal">24dp</dimen>
+    <dimen name="margin_screen_vertical">16dp</dimen>
+    <dimen name="space_small">8dp</dimen>
+    <dimen name="space_medium">16dp</dimen>
+    <dimen name="space_large">24dp</dimen>
+    <dimen name="space_xl">32dp</dimen>
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="icon_size_large">30dp</dimen>
+    <dimen name="logo_size">120dp</dimen>
+</resources>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                       xmlns:app="http://schemas.android.com/apk/res-auto"
+                                       xmlns:tools="http://schemas.android.com/tools"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="match_parent"
+                                       android:background="@color/brand_background"
+                                       android:fillViewport="true">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_screen_horizontal">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:text="Historial de Asistencias"
+                android:textColor="@color/brand_primary"
+                android:textAlignment="center"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText"/>
+
+        <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/brand_divider"
+                app:cardBackgroundColor="@color/brand_surface">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/space_medium">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha inicio"
+                        android:textColor="@color/brand_text_secondary"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        tools:ignore="HardcodedText"/>
+
+                <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"/>
+
+                <EditText
+                        android:id="@+id/datetime_inicio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="56dp"
+                        android:hint="YYYY-MM-DD"
+                        android:inputType="date"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:padding="12dp"
+                        android:textSize="16sp"
+                        android:textColor="@color/brand_text_primary"
+                        android:textColorHint="@color/brand_text_secondary"
+                        android:background="@color/brand_surface"
+                        tools:ignore="HardcodedText"/>
+
+                <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha fin"
+                        android:textColor="@color/brand_text_secondary"
+                        android:textStyle="bold"
+                        android:textSize="13sp"
+                        tools:ignore="HardcodedText"/>
+
+                <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"/>
+
+                <EditText
+                        android:id="@+id/datetime_fin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="56dp"
+                        android:hint="YYYY-MM-DD"
+                        android:inputType="date"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:padding="12dp"
+                        android:textSize="16sp"
+                        android:textColor="@color/brand_text_primary"
+                        android:textColorHint="@color/brand_text_secondary"
+                        android:background="@color/brand_surface"
+                        tools:ignore="HardcodedText"/>
+
+                <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp"/>
+
+                <Button
+                        android:id="@+id/btn_filt"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="Buscar"
+                        android:backgroundTint="@color/brand_primary"
+                        android:textColor="@color/brand_on_primary"
+                        android:textStyle="bold"
+                        android:elevation="2dp"
+                        tools:ignore="HardcodedText"/>
+
+                <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="16dp"
+                        android:indeterminateTint="@color/brand_primary"
+                        android:visibility="gone"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/brand_divider"
+                app:cardBackgroundColor="@color/brand_surface">
+
+            <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp"
+                    android:fillViewport="true">
+
+                <ScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                    <TableLayout
+                            android:id="@+id/table_lista"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:stretchColumns="*"
+                            android:divider="@color/brand_divider"
+                            android:showDividers="middle"/>
+
+                </ScrollView>
+
+            </HorizontalScrollView>
+        </com.google.android.material.card.MaterialCardView>
+
+        <Button
+                android:id="@+id/btnVolver"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="16dp"
+                android:text="Volver al Home"
+                android:backgroundTint="@color/brand_text_secondary"
+                android:textColor="@color/brand_on_primary"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -1,94 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/brand_background"
-            android:fillViewport="true">
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                       xmlns:app="http://schemas.android.com/apk/res-auto"
+                                       xmlns:tools="http://schemas.android.com/tools"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="match_parent"
+                                       android:fillViewport="true"
+                                       android:background="@color/brand_background"
+                                       tools:ignore="HardcodedText">
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="32dp"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:padding="@dimen/margin_screen_horizontal">
+
+        <ImageView
+                android:id="@+id/ivLogo"
+                android:layout_width="@dimen/logo_size"
+                android:layout_height="@dimen/logo_size"
+                android:layout_marginTop="32dp"
+                android:contentDescription="Logo Asis"
+                android:src="@mipmap/ic_launcher_round"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Asistencia Automática"
+                android:layout_marginTop="16dp"
+                android:text="Asis"
                 android:textColor="@color/brand_primary"
                 android:textSize="32sp"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                tools:ignore="HardcodedText"/>
+                android:textStyle="bold"/>
 
-        <LinearLayout
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="32dp"
+                android:text="Asistencia automática en tiempo real"
+                android:textColor="@color/brand_text_secondary"
+                android:textSize="14sp"/>
+
+        <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/corner_radius_card"
+                app:cardElevation="2dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/brand_divider"
+                app:cardBackgroundColor="@color/brand_surface"
+                android:layout_marginHorizontal="8dp">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/space_medium">
+
+                <EditText
+                        android:id="@+id/etTenant"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="56dp"
+                        android:hint="Enterprise"
+                        android:text="inlearning"
+                        android:textSize="16sp"
+                        android:textColor="@color/brand_text_primary"
+                        android:textColorHint="@color/brand_text_secondary"
+                        android:autofillHints="username"/>
+
+                <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp"/>
+
+                <EditText
+                        android:id="@+id/etUser"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="56dp"
+                        android:hint="Usuario"
+                        android:textSize="16sp"
+                        android:textColor="@color/brand_text_primary"
+                        android:textColorHint="@color/brand_text_secondary"
+                        android:autofillHints="username"
+                        android:inputType="text"/>
+
+                <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp"/>
+
+                <EditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="56dp"
+                        android:hint="Contraseña"
+                        android:textSize="16sp"
+                        android:textColor="@color/brand_text_primary"
+                        android:textColorHint="@color/brand_text_secondary"
+                        android:autofillHints="password"
+                        android:inputType="textPassword"/>
+
+                <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="24dp"/>
+
+                <Button
+                        android:id="@+id/btnLogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:text="Iniciar sesión"
+                        android:textAllCaps="false"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.02"
+                        android:backgroundTint="@color/brand_primary"
+                        android:textColor="@color/brand_on_primary"
+                        android:elevation="4dp"
+                        tools:ignore="TextContrastCheck"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:orientation="vertical"
-                android:background="@color/brand_surface"
-                android:padding="24dp"
-                android:elevation="4dp">
-
-            <EditText
-                    android:id="@+id/etTenant"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:hint="Enterprise"
-                    android:text="inlearning"
-                    android:padding="16dp"
-                    android:background="@color/brand_surface"
-                    android:textColor="@color/brand_text_primary"
-                    android:textAlignment="textStart"
-                    tools:ignore="HardcodedText"/>
-
-            <EditText
-                    android:id="@+id/etUser"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:hint="Usuario"
-                    android:padding="16dp"
-                    android:background="@color/brand_surface"
-                    android:textColor="@color/brand_text_primary"
-                    android:textAlignment="textStart"
-                    tools:ignore="HardcodedText"/>
-
-            <EditText
-                    android:id="@+id/etPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:hint="Contraseña"
-                    android:autofillHints="password"
-                    android:inputType="textPassword"
-                    android:padding="16dp"
-                    android:background="@color/brand_surface"
-                    android:textColor="@color/brand_text_primary"
-                    android:textAlignment="textStart"
-                    tools:ignore="HardcodedText"/>
-
-        </LinearLayout>
-
-        <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Iniciar sesión"
-                android:backgroundTint="@color/brand_primary"
-                android:textColor="@color/brand_on_primary"
-                android:textSize="16sp"
-                android:textAllCaps="false"
-                tools:ignore="HardcodedText"/>
+                android:layout_marginBottom="32dp"
+                android:text="© 2026"
+                android:textColor="@color/brand_text_secondary"
+                android:textSize="12sp"
+                android:textAlignment="center"/>
 
     </LinearLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

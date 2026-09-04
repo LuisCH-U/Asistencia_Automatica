@@ -7,7 +7,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.pr_asistencia.asistencia_auto.HomeActivity
 import com.pr_asistencia.asistencia_auto.R
 import com.pr_asistencia.asistencia_auto.App
 import com.pr_asistencia.asistencia_auto.models.LoginRequest
@@ -46,8 +45,9 @@ class LoginActivity : AppCompatActivity() {
 
         if (token != null) {
             startActivity(
-                Intent(this, HomeActivity::class.java)
+                Intent(this, MainActivity::class.java)
             )
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }
     }
@@ -88,7 +88,9 @@ class LoginActivity : AppCompatActivity() {
 
                     Toast.makeText(this@LoginActivity, "Login correcto", Toast.LENGTH_LONG).show()
 
-                    startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
 
                     finish()
 

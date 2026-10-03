@@ -60,14 +60,21 @@ class AttendanceReceiver : BroadcastReceiver() {
                     return@launch
                 }
 
-                val ok = AttendanceManager.marcarAsistencia()
+                val yaMarco = AttendanceManager.yaMarcoHoy(tipo)
 
-                if (ok) {
-                    Log.d("Asistencia - OK", "Asistencia marcada correctamente - Tipo:$tipo, Hora: $ahora")
-                    NotificationHelper.show(context, "Asistencia automática", "Tu asistencia se registró correctamente.")
+                if (yaMarco == true) {
+                    Log.d("Asistencia - Ya marcada", "Ya existe una asistencia registrada hoy - Tipo: $tipo, Hora: $ahora")
+                    NotificationHelper.show(context, "Asistencia automática", "Ya existe una asistencia registrada hoy. No se marcó de nuevo.")
                 } else {
-                    Log.d("Asistencia - Error", "Error al marcar asistencia - Tipo: $tipo, Hora: $ahora")
-                    NotificationHelper.show(context, "Asistencia automática", "No fue posible registrar la asistencia. Se intentará nuevamente.")
+                    val ok = AttendanceManager.marcarAsistencia()
+
+                    if (ok) {
+                        Log.d("Asistencia - OK", "Asistencia marcada correctamente - Tipo:$tipo, Hora: $ahora")
+                        NotificationHelper.show(context, "Asistencia automática", "Tu asistencia se registró correctamente.")
+                    } else {
+                        Log.d("Asistencia - Error", "Error al marcar asistencia - Tipo: $tipo, Hora: $ahora")
+                        NotificationHelper.show(context, "Asistencia automática", "No fue posible registrar la asistencia. Se intentará nuevamente.")
+                    }
                 }
 
                 if (tipo == 100) {

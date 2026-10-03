@@ -4,9 +4,34 @@ import com.pr_asistencia.asistencia_auto.App
 import com.pr_asistencia.asistencia_auto.helper.NotificationHelper
 import com.pr_asistencia.asistencia_auto.models.AttendanceRequest
 import com.pr_asistencia.asistencia_auto.network.RetrofitClient
+import org.json.JSONObject
 import java.time.OffsetDateTime
+import java.time.ZoneId
 
 object AttendanceManager {
+
+    suspend fun yaMarcoHoy(tipo: Int): Boolean?
+    {
+        return try {
+            val fechaHoy = java.time.LocalDate.now(ZoneId.of("America/Lima")).toString()
+
+            val respuesta = AttendanceAllmanager.recuperarAsistencias(fechaHoy, fechaHoy)
+                ?: return null
+
+            val json = JSONObject(respuesta)
+            val contenedor = if (json.has("result")) json.getJSONObject("result") else json
+            val totalMarcasHoy = contenedor.getJSONArray("items").length()
+
+            when {
+                totalMarcasHoy >= 2 -> true
+                tipo == 100 && totalMarcasHoy >= 1 -> true
+                else -> false
+            }
+        } catch (e: Exception)
+        {
+            null
+        }
+    }
 
     suspend fun marcarAsistencia(): Boolean
     {

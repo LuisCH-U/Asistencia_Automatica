@@ -16,6 +16,7 @@
 
     <color name="brand_danger">#F87171</color>
     <color name="brand_on_danger">#2B0606</color>
+    <color name="brand_danger_container">#3E1F1C</color>
 
     <color name="brand_background">#0F1411</color>
     <color name="brand_surface">#18211C</color>

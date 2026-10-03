@@ -32,6 +32,8 @@ import com.pr_asistencia.asistencia_auto.helper.NotificationHelper
 import com.pr_asistencia.asistencia_auto.manager.AttendanceManager
 import com.pr_asistencia.asistencia_auto.receiver.AttendanceReceiver
 import kotlinx.coroutines.launch
+import java.time.LocalTime
+import java.time.ZoneId
 import java.util.Calendar
 
 class HomeFragment : Fragment() {
@@ -221,6 +223,22 @@ class HomeFragment : Fragment() {
         btnMarcarAhora.isEnabled = false
 
         viewLifecycleOwner.lifecycleScope.launch {
+
+            val horaLima = LocalTime.now(ZoneId.of("America/Lima")).hour
+            val tipoDetectado = if (horaLima < 12) 100 else 200
+
+            val yaMarco = AttendanceManager.yaMarcoHoy(tipoDetectado)
+
+            if (yaMarco == true) {
+                btnMarcarAhora.isEnabled = true
+                Toast.makeText(requireContext(), "Ya existe una asistencia registrada hoy", Toast.LENGTH_LONG).show()
+                NotificationHelper.show(
+                    requireContext().applicationContext,
+                    "Asistencia automática",
+                    "Ya existe una asistencia registrada hoy. No se marcó de nuevo."
+                )
+                return@launch
+            }
 
             val ok = AttendanceManager.marcarAsistencia()
 

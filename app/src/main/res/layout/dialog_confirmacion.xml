@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:gravity="center_horizontal"
+              android:paddingTop="24dp"
+              android:paddingBottom="16dp"
+              android:paddingStart="8dp"
+              android:paddingEnd="8dp"
+              tools:ignore="HardcodedText">
+
+    <FrameLayout
+            android:id="@+id/dialogoFondoIcono"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/bg_icon_circle">
+
+        <ImageView
+                android:id="@+id/dialogoIcono"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:contentDescription="Icono de confirmación"
+                android:src="@drawable/ic_check_circle"/>
+    </FrameLayout>
+
+    <TextView
+            android:id="@+id/dialogoTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:text="Título"
+            android:textColor="@color/brand_text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+    <TextView
+            android:id="@+id/dialogoMensaje"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:lineSpacingExtra="2dp"
+            android:text="Mensaje de confirmación"
+            android:textColor="@color/brand_text_secondary"
+            android:textSize="14sp"/>
+
+    <com.google.android.material.button.MaterialButton
+            android:id="@+id/dialogoPositivo"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="26dp"
+            android:textAllCaps="false"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:cornerRadius="@dimen/corner_radius_button"/>
+
+    <TextView
+            android:id="@+id/dialogoNegativo"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="Cancelar"
+            android:textColor="@color/brand_text_secondary"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+</LinearLayout>

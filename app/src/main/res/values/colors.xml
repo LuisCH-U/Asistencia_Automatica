@@ -16,6 +16,7 @@
 
     <color name="brand_danger">#DC2626</color>
     <color name="brand_on_danger">#FFFFFF</color>
+    <color name="brand_danger_container">#FCE8E6</color>
 
     <color name="brand_background">#F5F8F5</color>
     <color name="brand_surface">#FFFFFF</color>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Modo oscuro: iconos claros en la barra de estado -->
+    <style name="Theme.Asistencia_Auto" parent="Theme.Asistencia_Auto.Base">
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+</resources>

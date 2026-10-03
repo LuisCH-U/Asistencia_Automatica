@@ -2,16 +2,14 @@ package com.pr_asistencia.asistencia_auto.activities.fragments
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.ProgressBar
-import android.widget.TableLayout
-import android.widget.TableRow
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -27,7 +25,7 @@ class AsistenciasFragment : Fragment() {
     private lateinit var dateFrom: EditText
     private lateinit var dateTo: EditText
     private lateinit var btnBuscar: Button
-    private lateinit var tableAsistencia: TableLayout
+    private lateinit var contenedorResultados: LinearLayout
     private var progressBar: ProgressBar? = null
 
     override fun onCreateView(
@@ -45,7 +43,7 @@ class AsistenciasFragment : Fragment() {
         dateFrom = view.findViewById(R.id.datetime_inicio)
         dateTo = view.findViewById(R.id.datetime_fin)
         btnBuscar = view.findViewById(R.id.btn_filt)
-        tableAsistencia = view.findViewById(R.id.table_lista)
+        contenedorResultados = view.findViewById(R.id.table_lista)
         progressBar = view.findViewById(R.id.progressBar)
 
         establecerFechaActual()
@@ -133,7 +131,7 @@ class AsistenciasFragment : Fragment() {
                 fechaFin = fechaFin
             )
 
-            mostrarRespuestaEnTabla(response ?: "Sin respuesta")
+            mostrarRespuestaEnTarjetas(response ?: "Sin respuesta")
 
             progressBar?.visibility = View.GONE
             btnBuscar.isEnabled = true
@@ -141,19 +139,11 @@ class AsistenciasFragment : Fragment() {
         }
     }
 
-    private fun mostrarRespuestaEnTabla(respuesta: String) {
-        tableAsistencia.removeAllViews()
+    private fun mostrarRespuestaEnTarjetas(respuesta: String) {
+        contenedorResultados.removeAllViews()
+        contenedorResultados.visibility = View.VISIBLE
 
         try {
-            agregarFilaTabla(
-                "Nombre",
-                "Apellidos",
-                "Código",
-                "Grupo",
-                "Fecha",
-                true
-            )
-
             val json = JSONObject(respuesta)
 
             val contenedor = if (json.has("result")) {
@@ -179,70 +169,67 @@ class AsistenciasFragment : Fragment() {
                 val group = employee?.optJSONObject("group")
                 val grupo = group?.optString("name", "")?.trim().orEmpty()
 
-                agregarFilaTabla(
-                    nombre,
-                    apellidos,
-                    codigo,
-                    grupo,
-                    fecha,
-                    false
-                )
+                agregarTarjeta(nombre, apellidos, codigo, grupo, fecha)
             }
 
             if (items.length() == 0) {
-                agregarFilaTabla(
-                    "Sin datos",
-                    "",
-                    "",
-                    "",
-                    "",
-                    false
+                mostrarEstado(
+                    titulo = "Sin datos",
+                    mensaje = "No hay asistencias en el rango seleccionado",
+                    colorTitulo = resources.getColor(R.color.brand_text_secondary, null)
                 )
             }
         } catch (e: Exception) {
-            agregarFilaTabla(
-                "Error al leer respuesta",
-                e.message ?: "",
-                "",
-                "",
-                "",
-                false
+            mostrarEstado(
+                titulo = "Error al leer respuesta",
+                mensaje = e.message ?: "",
+                colorTitulo = resources.getColor(R.color.brand_danger, null)
             )
         }
     }
 
-    private fun agregarFilaTabla(
+    private fun agregarTarjeta(
         nombre: String,
         apellidos: String,
         codigo: String,
         grupo: String,
-        fecha: String,
-        esCabecera: Boolean
+        fecha: String
     ) {
-        val fila = TableRow(requireContext())
+        val tarjeta = layoutInflater.inflate(R.layout.item_asistencia, contenedorResultados, false)
 
-        fila.addView(crearCelda(nombre, esCabecera))
-        fila.addView(crearCelda(apellidos, esCabecera))
-        fila.addView(crearCelda(codigo, esCabecera))
-        fila.addView(crearCelda(grupo, esCabecera))
-        fila.addView(crearCelda(fecha, esCabecera))
+        val partesFecha = fecha.split(" ")
+        val fechaTexto = partesFecha.getOrNull(0).orEmpty()
+        val horaTexto = partesFecha.getOrNull(1).orEmpty()
 
-        tableAsistencia.addView(fila)
+        tarjeta.findViewById<TextView>(R.id.item_nombre).text =
+            "$nombre $apellidos".trim().ifEmpty { "Sin nombre" }
+
+        tarjeta.findViewById<TextView>(R.id.item_grupo).text = grupo
+
+        tarjeta.findViewById<TextView>(R.id.item_codigo).text =
+            "Cód. ${codigo.ifEmpty { "—" }}"
+
+        tarjeta.findViewById<TextView>(R.id.item_fecha).text = fechaTexto
+        tarjeta.findViewById<TextView>(R.id.item_hora).text = horaTexto
+
+        contenedorResultados.addView(tarjeta)
     }
 
-    private fun crearCelda(
-        texto: String,
-        esCabecera: Boolean
-    ): TextView {
-        val celda = TextView(requireContext())
-        celda.text = texto
-        celda.setPadding(12, 12, 12, 12)
-        celda.textSize = 12f
+    private fun mostrarEstado(
+        titulo: String,
+        mensaje: String,
+        colorTitulo: Int
+    ) {
+        val vista = layoutInflater.inflate(R.layout.item_estado, contenedorResultados, false)
 
-        if (esCabecera) {
-            celda.setTypeface(null, Typeface.BOLD)
+        vista.findViewById<TextView>(R.id.estado_titulo).apply {
+            text = titulo
+            setTextColor(colorTitulo)
         }
-        return celda
+
+        vista.findViewById<TextView>(R.id.estado_mensaje).text = mensaje
+
+        contenedorResultados.addView(vista)
     }
 
     private fun formatearFecha(fechaCompleta: String): String {

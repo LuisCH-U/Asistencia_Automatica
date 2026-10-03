@@ -3,15 +3,28 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="brand_primary">#66BB6A</color>
-    <color name="brand_primary_dark">#2E7D32</color>
-    <color name="brand_primary_light">#81C784</color>
-    <color name="brand_accent">#FFD54F</color>
-    <color name="brand_danger">#EF5350</color>
-    <color name="brand_background">#121212</color>
-    <color name="brand_surface">#1E1E1E</color>
-    <color name="brand_on_primary">#1B1B1B</color>
-    <color name="brand_text_primary">#FFFFFF</color>
-    <color name="brand_text_secondary">#B0BEC5</color>
-    <color name="brand_divider">#2C2C2C</color>
+    <!-- Paleta verde moderna - modo oscuro -->
+    <color name="brand_primary">#52D98F</color>
+    <color name="brand_primary_dark">#0A3D1E</color>
+    <color name="brand_primary_light">#86EFAC</color>
+    <color name="brand_on_primary">#062E17</color>
+    <color name="brand_primary_container">#1F5C3A</color>
+    <color name="brand_on_primary_container">#A9F0C5</color>
+
+    <color name="brand_accent">#FFC53D</color>
+    <color name="brand_on_accent">#1A1A1A</color>
+
+    <color name="brand_danger">#F87171</color>
+    <color name="brand_on_danger">#2B0606</color>
+
+    <color name="brand_background">#0F1411</color>
+    <color name="brand_surface">#18211C</color>
+    <color name="brand_surface_variant">#1F2C26</color>
+    <color name="brand_on_surface_variant">#A9B8AE</color>
+
+    <color name="brand_text_primary">#E9F1EC</color>
+    <color name="brand_text_secondary">#A8B8AE</color>
+
+    <color name="brand_outline">#3A4A41</color>
+    <color name="brand_divider">#26332C</color>
 </resources>

@@ -14,8 +14,8 @@ android {
         applicationId = "com.pr_asistencia.asistencia_auto"
         minSdk = 31
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.1"
+        versionCode = 3
+        versionName = "1.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -64,6 +64,8 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore")
 
     implementation("com.google.android.material:material:1.14.0")
+
+    implementation("io.coil-kt:coil:2.7.0")
 
     implementation("com.google.firebase:firebase-firestore-ktx:25.1.4")
 

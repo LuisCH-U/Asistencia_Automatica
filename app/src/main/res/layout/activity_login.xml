@@ -19,23 +19,24 @@
                 android:id="@+id/ivLogo"
                 android:layout_width="@dimen/logo_size"
                 android:layout_height="@dimen/logo_size"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="48dp"
                 android:contentDescription="Logo Asis"
                 android:src="@mipmap/ic_launcher_round"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/app_name"
                 android:textColor="@color/brand_primary"
                 android:textSize="36sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:letterSpacing="0.02"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginBottom="32dp"
                 android:text="Asistencia automática"
                 android:textColor="@color/brand_text_secondary"
@@ -45,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/corner_radius_card"
-                app:cardElevation="3dp"
+                app:cardElevation="2dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/brand_divider"
                 app:cardBackgroundColor="@color/brand_surface">
@@ -134,6 +135,7 @@
                         android:textAllCaps="false"
                         android:textSize="16sp"
                         android:textStyle="bold"
+                        app:backgroundTint="@color/brand_primary"
                         app:cornerRadius="@dimen/corner_radius_button"
                         app:icon="@drawable/ic_login"
                         app:iconGravity="start"

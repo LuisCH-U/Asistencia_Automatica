@@ -5,7 +5,8 @@
                                        android:layout_width="match_parent"
                                        android:layout_height="match_parent"
                                        android:background="@color/brand_background"
-                                       android:fillViewport="true">
+                                       android:fillViewport="true"
+                                       tools:ignore="HardcodedText">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -19,17 +20,16 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="24dp"
                 android:text="Historial de Asistencias"
-                android:textColor="@color/brand_primary"
+                android:textColor="@color/brand_text_primary"
                 android:textAlignment="center"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                tools:ignore="HardcodedText"/>
+                android:textSize="@dimen/text_size_title"
+                android:textStyle="bold"/>
 
         <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
+                android:layout_marginBottom="@dimen/space_medium"
+                app:cardCornerRadius="@dimen/corner_radius_card"
                 app:cardElevation="2dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/brand_divider"
@@ -41,143 +41,134 @@
                     android:orientation="vertical"
                     android:padding="@dimen/space_medium">
 
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Fecha inicio"
-                        android:textColor="@color/brand_text_secondary"
-                        android:textStyle="bold"
-                        android:textSize="13sp"
-                        tools:ignore="HardcodedText"/>
-
-                <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="8dp"/>
-
-                <EditText
-                        android:id="@+id/datetime_inicio"
+                <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="56dp"
-                        android:hint="YYYY-MM-DD"
-                        android:inputType="date"
-                        android:focusable="false"
-                        android:clickable="true"
-                        android:padding="12dp"
-                        android:textSize="16sp"
-                        android:textColor="@color/brand_text_primary"
-                        android:textColorHint="@color/brand_text_secondary"
-                        android:background="@color/brand_surface"
-                        tools:ignore="HardcodedText"/>
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                    <ImageView
+                            android:layout_width="@dimen/icon_size"
+                            android:layout_height="@dimen/icon_size"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="Filtro"
+                            android:src="@drawable/ic_search"
+                            app:tint="@color/brand_primary"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Filtrar por rango de fechas"
+                            android:textColor="@color/brand_text_primary"
+                            android:textSize="@dimen/text_size_section"
+                            android:textStyle="bold"/>
+                </LinearLayout>
 
                 <Space
                         android:layout_width="match_parent"
                         android:layout_height="16dp"/>
 
-                <TextView
-                        android:layout_width="wrap_content"
+                <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Fecha fin"
-                        android:textColor="@color/brand_text_secondary"
-                        android:textStyle="bold"
-                        android:textSize="13sp"
-                        tools:ignore="HardcodedText"/>
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:hint="Fecha inicio"
+                        app:boxCornerRadiusTopStart="@dimen/corner_radius_input"
+                        app:boxCornerRadiusTopEnd="@dimen/corner_radius_input"
+                        app:boxCornerRadiusBottomStart="@dimen/corner_radius_input"
+                        app:boxCornerRadiusBottomEnd="@dimen/corner_radius_input"
+                        app:startIconDrawable="@drawable/ic_calendar">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/datetime_inicio"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="YYYY-MM-DD"
+                            android:inputType="date"
+                            android:focusable="false"
+                            android:clickable="true"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Space
                         android:layout_width="match_parent"
-                        android:layout_height="8dp"/>
+                        android:layout_height="12dp"/>
 
-                <EditText
-                        android:id="@+id/datetime_fin"
+                <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="56dp"
-                        android:hint="YYYY-MM-DD"
-                        android:inputType="date"
-                        android:focusable="false"
-                        android:clickable="true"
-                        android:padding="12dp"
-                        android:textSize="16sp"
-                        android:textColor="@color/brand_text_primary"
-                        android:textColorHint="@color/brand_text_secondary"
-                        android:background="@color/brand_surface"
-                        tools:ignore="HardcodedText"/>
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:hint="Fecha fin"
+                        app:boxCornerRadiusTopStart="@dimen/corner_radius_input"
+                        app:boxCornerRadiusTopEnd="@dimen/corner_radius_input"
+                        app:boxCornerRadiusBottomStart="@dimen/corner_radius_input"
+                        app:boxCornerRadiusBottomEnd="@dimen/corner_radius_input"
+                        app:startIconDrawable="@drawable/ic_calendar">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/datetime_fin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="YYYY-MM-DD"
+                            android:inputType="date"
+                            android:focusable="false"
+                            android:clickable="true"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Space
                         android:layout_width="match_parent"
                         android:layout_height="16dp"/>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_filt"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="@dimen/height_button"
                         android:text="Buscar"
-                        android:backgroundTint="@color/brand_primary"
-                        android:textColor="@color/brand_on_primary"
+                        android:textAllCaps="false"
+                        android:textSize="15sp"
                         android:textStyle="bold"
-                        android:elevation="2dp"
-                        android:drawableStart="@drawable/ic_search"
-                        android:drawablePadding="10dp"
-                        android:drawableTint="@color/brand_on_primary"
-                        tools:ignore="HardcodedText"/>
+                        app:backgroundTint="@color/brand_primary"
+                        app:icon="@drawable/ic_search"
+                        app:iconGravity="start"
+                        app:iconPadding="12dp"
+                        app:cornerRadius="@dimen/corner_radius_button"/>
 
                 <ProgressBar
                         android:id="@+id/progressBar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/space_medium"
                         android:indeterminateTint="@color/brand_primary"
                         android:visibility="gone"/>
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
+                android:id="@+id/table_lista"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/brand_divider"
-                app:cardBackgroundColor="@color/brand_surface">
+                android:orientation="vertical"
+                android:visibility="gone"/>
 
-            <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="320dp"
-                    android:fillViewport="true">
-
-                <ScrollView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
-
-                    <TableLayout
-                            android:id="@+id/table_lista"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:stretchColumns="*"
-                            android:divider="@color/brand_divider"
-                            android:showDividers="middle"/>
-
-                </ScrollView>
-
-            </HorizontalScrollView>
-        </com.google.android.material.card.MaterialCardView>
-
-        <Button
+        <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnVolver"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/height_button"
+                android:layout_marginTop="4dp"
                 android:layout_marginBottom="16dp"
+                android:visibility="gone"
                 android:text="Volver al Home"
-                android:backgroundTint="@color/brand_text_secondary"
-                android:textColor="@color/brand_on_primary"
+                android:textAllCaps="false"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                android:drawableStart="@drawable/ic_arrow_back"
-                android:drawablePadding="10dp"
-                android:drawableTint="@color/brand_on_primary"
-                tools:ignore="HardcodedText"/>
+                app:backgroundTint="@color/brand_primary_container"
+                app:iconTint="@color/brand_on_primary_container"
+                android:textColor="@color/brand_on_primary_container"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconGravity="start"
+                app:iconPadding="12dp"
+                app:cornerRadius="@dimen/corner_radius_button"/>
 
     </LinearLayout>
 

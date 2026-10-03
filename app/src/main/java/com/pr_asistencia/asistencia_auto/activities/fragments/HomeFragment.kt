@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
-import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity.ALARM_SERVICE
@@ -22,6 +21,7 @@ import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.materialswitch.MaterialSwitch
 import com.pr_asistencia.asistencia_auto.App
 import com.pr_asistencia.asistencia_auto.R
 import com.pr_asistencia.asistencia_auto.activities.LoginActivity
@@ -33,14 +33,13 @@ import com.pr_asistencia.asistencia_auto.receiver.AttendanceReceiver
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
-@SuppressLint("UseSwitchCompatOrMaterialCode")
 class HomeFragment : Fragment() {
 
     private lateinit var txtHoraEntrada: TextView
     private lateinit var txtHoraSalida: TextView
-    private lateinit var switchAutomatico: Switch
-    private lateinit var switchActivo: Switch
-    private lateinit var switchFeriados: Switch
+    private lateinit var switchAutomatico: MaterialSwitch
+    private lateinit var switchActivo: MaterialSwitch
+    private lateinit var switchFeriados: MaterialSwitch
     private lateinit var btnGuardar: Button
     private lateinit var btnMarcarAhora: Button
     private lateinit var btnVerAsistencias: Button
@@ -204,7 +203,7 @@ class HomeFragment : Fragment() {
     private fun cargarConfiguracion() {
         val prefs = requireContext().getSharedPreferences("config", Context.MODE_PRIVATE)
         txtHoraEntrada.text = prefs.getString("horaEntrada", "08:25")
-        txtHoraSalida.text = prefs.getString("horaSalida", "18:36")
+        txtHoraSalida.text = prefs.getString("horaSalida", "18:35")
         switchAutomatico.isChecked = prefs.getBoolean("automatico", true)
         switchActivo.isChecked = prefs.getBoolean("activo", true)
         switchFeriados.isChecked = prefs.getBoolean("feriadosActivos", true)

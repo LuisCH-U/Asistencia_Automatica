@@ -5,7 +5,8 @@
                                        android:layout_width="match_parent"
                                        android:layout_height="match_parent"
                                        android:background="@color/brand_background"
-                                       android:fillViewport="true">
+                                       android:fillViewport="true"
+                                       tools:ignore="HardcodedText">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -19,16 +20,16 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="24dp"
                 android:text="@string/configuraci_n_asis"
-                android:textColor="@color/brand_primary"
-                android:textSize="28sp"
+                android:textColor="@color/brand_text_primary"
+                android:textSize="@dimen/text_size_title"
                 android:textStyle="bold"
                 android:textAlignment="center"/>
 
         <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
+                android:layout_marginBottom="@dimen/space_medium"
+                app:cardCornerRadius="@dimen/corner_radius_card"
                 app:cardElevation="2dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/brand_divider"
@@ -40,52 +41,94 @@
                     android:orientation="vertical"
                     android:padding="@dimen/space_medium">
 
-                <TextView
-                        android:layout_width="wrap_content"
+                <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Horarios de marcación"
-                        android:textColor="@color/brand_primary"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                    <ImageView
+                            android:layout_width="@dimen/icon_size"
+                            android:layout_height="@dimen/icon_size"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="Horarios"
+                            android:src="@drawable/ic_alarm"
+                            app:tint="@color/brand_primary"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Horarios de marcación"
+                            android:textColor="@color/brand_text_primary"
+                            android:textSize="@dimen/text_size_section"
+                            android:textStyle="bold"/>
+                </LinearLayout>
 
                 <Space
                         android:layout_width="match_parent"
-                        android:layout_height="12dp"/>
+                        android:layout_height="16dp"/>
 
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:weightSum="2"
-                        android:gravity="center_vertical">
+                        android:baselineAligned="false">
 
-                    <TextView
-                            android:id="@+id/txtHoraEntrada"
+                    <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:padding="16dp"
-                            android:gravity="center"
-                            android:text="08:25"
-                            android:textSize="22sp"
-                            android:textColor="@color/black"
-                            android:background="@color/brand_accent"
-                            tools:ignore="HardcodedText"/>
+                            android:layout_weight="1"
+                            android:layout_marginEnd="6dp"
+                            android:orientation="vertical">
 
-                    <TextView
-                            android:id="@+id/txtHoraSalida"
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="6dp"
+                                android:text="Entrada"
+                                android:textColor="@color/brand_text_secondary"
+                                android:textSize="@dimen/text_size_label"
+                                android:textStyle="bold"/>
+
+                        <TextView
+                                android:id="@+id/txtHoraEntrada"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/height_chip_time"
+                                android:gravity="center"
+                                android:background="@drawable/bg_chip_time"
+                                android:text="08:25"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/brand_on_primary_container"/>
+                    </LinearLayout>
+
+                    <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:padding="16dp"
-                            android:gravity="center"
-                            android:text="18:35"
-                            android:textSize="22sp"
-                            android:textColor="@color/black"
-                            android:background="@color/brand_accent"
-                            tools:ignore="HardcodedText"/>
+                            android:layout_weight="1"
+                            android:layout_marginStart="6dp"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="6dp"
+                                android:text="Salida"
+                                android:textColor="@color/brand_text_secondary"
+                                android:textSize="@dimen/text_size_label"
+                                android:textStyle="bold"/>
+
+                        <TextView
+                                android:id="@+id/txtHoraSalida"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/height_chip_time"
+                                android:gravity="center"
+                                android:background="@drawable/bg_chip_time"
+                                android:text="18:35"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/brand_on_primary_container"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -95,7 +138,7 @@
                         android:layout_marginTop="8dp"
                         android:gravity="center"
                         android:text="Toca para cambiar hora"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/text_size_caption"
                         android:textColor="@color/brand_text_secondary"/>
 
             </LinearLayout>
@@ -104,8 +147,8 @@
         <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
+                android:layout_marginBottom="@dimen/space_medium"
+                app:cardCornerRadius="@dimen/corner_radius_card"
                 app:cardElevation="2dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/brand_divider"
@@ -117,41 +160,59 @@
                     android:orientation="vertical"
                     android:padding="@dimen/space_medium">
 
-                <TextView
-                        android:layout_width="wrap_content"
+                <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Modo de operación"
-                        android:textColor="@color/brand_primary"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                    <ImageView
+                            android:layout_width="@dimen/icon_size"
+                            android:layout_height="@dimen/icon_size"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="Modo de operación"
+                            android:src="@drawable/ic_settings"
+                            app:tint="@color/brand_primary"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Modo de operación"
+                            android:textColor="@color/brand_text_primary"
+                            android:textSize="@dimen/text_size_section"
+                            android:textStyle="bold"/>
+                </LinearLayout>
 
                 <Space
                         android:layout_width="match_parent"
-                        android:layout_height="12dp"/>
+                        android:layout_height="8dp"/>
 
-                <Switch
+                <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/switchAutomatico"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:text="Modo Automático"
-                        android:buttonTint="@color/brand_primary"
-                        tools:ignore="UseSwitchCompatOrMaterialCode,HardcodedText"/>
+                        android:textSize="@dimen/text_size_body"
+                        android:textColor="@color/brand_text_primary"/>
 
-                <Switch
+                <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/switchActivo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="Activar Asistencia"
-                        android:buttonTint="@color/brand_primary"
-                        tools:ignore="UseSwitchCompatOrMaterialCode,HardcodedText"/>
+                        android:textSize="@dimen/text_size_body"
+                        android:textColor="@color/brand_text_primary"/>
 
-                <Switch
+                <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/switchFeriados"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="Ignorar feriados nacionales"
-                        android:buttonTint="@color/brand_primary"
-                        tools:ignore="UseSwitchCompatOrMaterialCode,HardcodedText"/>
+                        android:textSize="@dimen/text_size_body"
+                        android:textColor="@color/brand_text_primary"/>
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -159,8 +220,8 @@
         <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
+                android:layout_marginBottom="@dimen/space_medium"
+                app:cardCornerRadius="@dimen/corner_radius_card"
                 app:cardElevation="2dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/brand_divider"
@@ -172,13 +233,28 @@
                     android:orientation="vertical"
                     android:padding="@dimen/space_medium">
 
-                <TextView
-                        android:layout_width="wrap_content"
+                <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Días activos"
-                        android:textColor="@color/brand_primary"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                    <ImageView
+                            android:layout_width="@dimen/icon_size"
+                            android:layout_height="@dimen/icon_size"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="Días activos"
+                            android:src="@drawable/ic_calendar"
+                            app:tint="@color/brand_primary"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Días activos"
+                            android:textColor="@color/brand_text_primary"
+                            android:textSize="@dimen/text_size_section"
+                            android:textStyle="bold"/>
+                </LinearLayout>
 
                 <Space
                         android:layout_width="match_parent"
@@ -199,19 +275,19 @@
                                 android:id="@+id/checkLunes"
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
-                                android:layout_height="wrap_content"
+                                android:layout_height="48dp"
                                 android:text="Lunes"
-                                android:buttonTint="@color/brand_primary"
-                                tools:ignore="HardcodedText"/>
+                                android:textSize="15sp"
+                                android:buttonTint="@color/brand_primary"/>
 
                         <CheckBox
                                 android:id="@+id/checkMartes"
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
-                                android:layout_height="wrap_content"
+                                android:layout_height="48dp"
                                 android:text="Martes"
-                                android:buttonTint="@color/brand_primary"
-                                tools:ignore="HardcodedText"/>
+                                android:textSize="15sp"
+                                android:buttonTint="@color/brand_primary"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -224,19 +300,19 @@
                                 android:id="@+id/checkMiercoles"
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
-                                android:layout_height="wrap_content"
+                                android:layout_height="48dp"
                                 android:text="Miércoles"
-                                android:buttonTint="@color/brand_primary"
-                                tools:ignore="HardcodedText"/>
+                                android:textSize="15sp"
+                                android:buttonTint="@color/brand_primary"/>
 
                         <CheckBox
                                 android:id="@+id/checkJueves"
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
-                                android:layout_height="wrap_content"
+                                android:layout_height="48dp"
                                 android:text="Jueves"
-                                android:buttonTint="@color/brand_primary"
-                                tools:ignore="HardcodedText"/>
+                                android:textSize="15sp"
+                                android:buttonTint="@color/brand_primary"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -249,28 +325,28 @@
                                 android:id="@+id/checkViernes"
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
-                                android:layout_height="wrap_content"
+                                android:layout_height="48dp"
                                 android:text="Viernes"
-                                android:buttonTint="@color/brand_primary"
-                                tools:ignore="HardcodedText"/>
+                                android:textSize="15sp"
+                                android:buttonTint="@color/brand_primary"/>
 
                         <CheckBox
                                 android:id="@+id/checkSabado"
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
-                                android:layout_height="wrap_content"
+                                android:layout_height="48dp"
                                 android:text="Sábado"
-                                android:buttonTint="@color/brand_primary"
-                                tools:ignore="HardcodedText"/>
+                                android:textSize="15sp"
+                                android:buttonTint="@color/brand_primary"/>
                     </LinearLayout>
 
                     <CheckBox
                             android:id="@+id/checkDomingo"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="48dp"
                             android:text="Domingo"
-                            android:buttonTint="@color/brand_primary"
-                            tools:ignore="HardcodedText"/>
+                            android:textSize="15sp"
+                            android:buttonTint="@color/brand_primary"/>
 
                 </LinearLayout>
 
@@ -279,65 +355,76 @@
 
         <Space
                 android:layout_width="match_parent"
-                android:layout_height="16dp"/>
+                android:layout_height="8dp"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnGuardar"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/height_button"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="12dp"
                 android:text="Guardar Configuración"
-                android:backgroundTint="@color/brand_primary_light"
-                android:textColor="@color/brand_on_primary"
+                android:textAllCaps="false"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                android:drawableStart="@drawable/ic_save"
-                android:drawablePadding="10dp"
-                android:drawableTint="@color/brand_on_primary"
-                tools:ignore="HardcodedText"/>
+                app:backgroundTint="@color/brand_primary"
+                app:icon="@drawable/ic_save"
+                app:iconGravity="start"
+                app:iconPadding="12dp"
+                app:cornerRadius="@dimen/corner_radius_button"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnVerAsistencia"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/height_button"
                 android:layout_marginBottom="12dp"
+                android:visibility="gone"
                 android:text="Ver Historial"
-                android:backgroundTint="@color/brand_primary"
-                android:textColor="@color/brand_on_primary"
+                android:textAllCaps="false"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                android:drawableStart="@drawable/ic_history"
-                android:drawablePadding="10dp"
-                android:drawableTint="@color/brand_on_primary"
-                tools:ignore="HardcodedText"/>
+                app:backgroundTint="@color/brand_primary_container"
+                app:iconTint="@color/brand_on_primary_container"
+                android:textColor="@color/brand_on_primary_container"
+                app:icon="@drawable/ic_history"
+                app:iconGravity="start"
+                app:iconPadding="12dp"
+                app:cornerRadius="@dimen/corner_radius_button"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnMarcarAhora"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginBottom="12dp"
                 android:text="Marcar Asistencia Ahora"
-                android:backgroundTint="@color/brand_accent"
-                android:textColor="@color/black"
+                android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:elevation="4dp"
-                android:drawableStart="@drawable/ic_check_circle"
-                android:drawablePadding="10dp"
-                android:drawableTint="@color/black"
-                tools:ignore="HardcodedText"/>
+                app:backgroundTint="@color/brand_accent"
+                android:textColor="@color/brand_on_accent"
+                app:iconTint="@color/brand_on_accent"
+                app:icon="@drawable/ic_check_circle"
+                app:iconGravity="start"
+                app:iconPadding="12dp"
+                app:cornerRadius="@dimen/corner_radius_button"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCerrarSesion"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/height_button"
                 android:layout_marginBottom="32dp"
                 android:text="Cerrar Sesión"
-                android:backgroundTint="@color/brand_danger"
-                android:textColor="@color/brand_on_primary"
+                android:textAllCaps="false"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                android:drawableStart="@drawable/ic_logout"
-                android:drawablePadding="10dp"
-                android:drawableTint="@color/brand_on_primary"
-                tools:ignore="HardcodedText"/>
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:textColor="@color/brand_danger"
+                app:strokeColor="@color/brand_danger"
+                app:icon="@drawable/ic_logout"
+                app:iconTint="@color/brand_danger"
+                app:iconGravity="start"
+                app:iconPadding="12dp"
+                app:cornerRadius="@dimen/corner_radius_button"/>
 
     </LinearLayout>
 

@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                       xmlns:app="http://schemas.android.com/apk/res-auto"
+                                       xmlns:tools="http://schemas.android.com/tools"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="match_parent"
+                                       android:background="@color/brand_background"
+                                       android:fillViewport="true"
+                                       tools:ignore="HardcodedText">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_screen_horizontal">
+
+        <!-- Estado: cargando -->
+        <LinearLayout
+                android:id="@+id/perfilCargando"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="96dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:visibility="gone">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    app:indicatorSize="40dp"
+                    app:indicatorColor="@color/brand_primary"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Cargando perfil…"
+                    android:textColor="@color/brand_text_secondary"
+                    android:textSize="14sp"/>
+        </LinearLayout>
+
+        <!-- Estado: error -->
+        <com.google.android.material.card.MaterialCardView
+                android:id="@+id/perfilError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/corner_radius_card"
+                app:cardElevation="1dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/brand_divider"
+                app:cardBackgroundColor="@color/brand_surface">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/space_large">
+
+                <FrameLayout
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:background="@drawable/bg_icon_circle">
+
+                    <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="Perfil"
+                            android:src="@drawable/ic_person"
+                            app:tint="@color/brand_text_secondary"/>
+                </FrameLayout>
+
+                <TextView
+                        android:id="@+id/perfilErrorTitulo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_medium"
+                        android:text="No se pudo cargar el perfil"
+                        android:textColor="@color/brand_text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/perfilErrorMensaje"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="Mensaje de error"
+                        android:textColor="@color/brand_text_secondary"
+                        android:textSize="13sp"/>
+
+                <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnReintentar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="@dimen/space_medium"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="24dp"
+                        android:text="Reintentar"
+                        android:textAllCaps="false"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:backgroundTint="@color/brand_primary"
+                        app:cornerRadius="@dimen/corner_radius_button"/>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Contenido del perfil -->
+        <LinearLayout
+                android:id="@+id/perfilContenido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+            <FrameLayout
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_gravity="center_horizontal">
+
+                <TextView
+                        android:id="@+id/avatarIniciales"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_icon_circle"
+                        android:gravity="center"
+                        android:text="?"
+                        android:textColor="@color/brand_on_primary_container"
+                        android:textSize="30sp"
+                        android:textStyle="bold"/>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/avatarFoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearance.App.Circle"
+                        android:contentDescription="Foto de perfil"/>
+            </FrameLayout>
+
+            <TextView
+                    android:id="@+id/perfilNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_medium"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:text="Nombre del usuario"
+                    android:textColor="@color/brand_text_primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold"/>
+
+            <TextView
+                    android:id="@+id/perfilRol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/bg_badge_code"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="Colaborador"
+                    android:textColor="@color/brand_on_primary_container"
+                    android:textSize="12sp"
+                    android:textStyle="bold"/>
+
+            <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_large"
+                    app:cardCornerRadius="@dimen/corner_radius_card"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/brand_divider"
+                    app:cardBackgroundColor="@color/brand_surface">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/space_medium">
+
+                    <LinearLayout
+                            android:id="@+id/filaCorreo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:paddingBottom="12dp">
+
+                            <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:contentDescription="Correo"
+                                    android:src="@drawable/ic_email"
+                                    app:tint="@color/brand_primary"/>
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Correo"
+                                        android:textColor="@color/brand_text_secondary"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold"/>
+
+                                <TextView
+                                        android:id="@+id/valorCorreo"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="1dp"
+                                        android:maxLines="1"
+                                        android:ellipsize="end"
+                                        android:text="correo@empresa.com"
+                                        android:textColor="@color/brand_text_primary"
+                                        android:textSize="15sp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/brand_divider"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/filaCodigo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:paddingTop="12dp"
+                                android:paddingBottom="12dp">
+
+                            <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:contentDescription="Código"
+                                    android:src="@drawable/ic_badge"
+                                    app:tint="@color/brand_primary"/>
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Código"
+                                        android:textColor="@color/brand_text_secondary"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold"/>
+
+                                <TextView
+                                        android:id="@+id/valorCodigo"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="1dp"
+                                        android:text="0000"
+                                        android:textColor="@color/brand_text_primary"
+                                        android:textSize="15sp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/brand_divider"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/filaTelefono"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:paddingTop="12dp"
+                                android:paddingBottom="12dp">
+
+                            <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:contentDescription="Teléfono"
+                                    android:src="@drawable/ic_phone"
+                                    app:tint="@color/brand_primary"/>
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Teléfono"
+                                        android:textColor="@color/brand_text_secondary"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold"/>
+
+                                <TextView
+                                        android:id="@+id/valorTelefono"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="1dp"
+                                        android:text="999 999 999"
+                                        android:textColor="@color/brand_text_primary"
+                                        android:textSize="15sp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/brand_divider"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/filaCiudad"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:paddingTop="12dp"
+                                android:paddingBottom="12dp">
+
+                            <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:contentDescription="Ciudad"
+                                    android:src="@drawable/ic_location"
+                                    app:tint="@color/brand_primary"/>
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Ciudad"
+                                        android:textColor="@color/brand_text_secondary"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold"/>
+
+                                <TextView
+                                        android:id="@+id/valorCiudad"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="1dp"
+                                        android:text="Ciudad"
+                                        android:textColor="@color/brand_text_primary"
+                                        android:textSize="15sp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/brand_divider"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/filaPais"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:paddingTop="12dp"
+                                android:paddingBottom="12dp">
+
+                            <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:contentDescription="País"
+                                    android:src="@drawable/ic_domain"
+                                    app:tint="@color/brand_primary"/>
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="País"
+                                        android:textColor="@color/brand_text_secondary"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold"/>
+
+                                <TextView
+                                        android:id="@+id/valorPais"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="1dp"
+                                        android:text="País"
+                                        android:textColor="@color/brand_text_primary"
+                                        android:textSize="15sp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/brand_divider"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/filaCumpleanhos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:paddingTop="12dp">
+
+                            <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:contentDescription="Cumpleaños"
+                                    android:src="@drawable/ic_cake"
+                                    app:tint="@color/brand_primary"/>
+
+                            <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Cumpleaños"
+                                        android:textColor="@color/brand_text_secondary"
+                                        android:textSize="11sp"
+                                        android:textStyle="bold"/>
+
+                                <TextView
+                                        android:id="@+id/valorCumpleanhos"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="1dp"
+                                        android:text="01/01/2000"
+                                        android:textColor="@color/brand_text_primary"
+                                        android:textSize="15sp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_large"
+                    android:layout_marginBottom="16dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Created by Luis CH. U."
+                    android:textColor="@color/brand_text_secondary"
+                    android:textSize="13sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

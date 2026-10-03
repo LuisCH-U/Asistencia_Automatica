@@ -10,6 +10,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.pr_asistencia.asistencia_auto.App
 import com.pr_asistencia.asistencia_auto.R
 import com.pr_asistencia.asistencia_auto.activities.LoginActivity
@@ -31,27 +32,49 @@ class SettingsFragment : Fragment() {
             cerrarSesion()
         }
 
-        view.findViewById<Button>(R.id.btnChangeTheme)?.setOnClickListener {
-            toggleTheme()
+        view.findViewById<MaterialButtonToggleGroup>(R.id.grupoTema)?.apply {
+            when (leerModoTema()) {
+                1 -> check(R.id.btnTemaClaro)
+                2 -> check(R.id.btnTemaOscuro)
+                else -> check(R.id.btnTemaSistema)
+            }
+
+            addOnButtonCheckedListener { _, checkedId, isChecked ->
+                if (!isChecked) return@addOnButtonCheckedListener
+
+                val modo = when (checkedId) {
+                    R.id.btnTemaClaro -> 1
+                    R.id.btnTemaOscuro -> 2
+                    else -> 0
+                }
+
+                guardarModoTema(modo)
+
+                AppCompatDelegate.setDefaultNightMode(
+                    when (modo) {
+                        1 -> AppCompatDelegate.MODE_NIGHT_NO
+                        2 -> AppCompatDelegate.MODE_NIGHT_YES
+                        else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                    }
+                )
+            }
         }
     }
 
-    private fun toggleTheme() {
+    private fun leerModoTema(): Int {
         val prefs = requireContext().getSharedPreferences("config", Context.MODE_PRIVATE)
-        val darkModeActual = prefs.getBoolean(
-            "darkMode",
-            AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
-        )
-        val nuevoDarkMode = !darkModeActual
-
-        prefs.edit {
-            putBoolean("darkMode", nuevoDarkMode)
+        return when {
+            prefs.contains("modoTema") -> prefs.getInt("modoTema", 0)
+            prefs.contains("darkMode") -> if (prefs.getBoolean("darkMode", false)) 2 else 1
+            else -> 0
         }
+    }
 
-        AppCompatDelegate.setDefaultNightMode(
-            if (nuevoDarkMode) AppCompatDelegate.MODE_NIGHT_YES
-            else AppCompatDelegate.MODE_NIGHT_NO
-        )
+    private fun guardarModoTema(modo: Int) {
+        val prefs = requireContext().getSharedPreferences("config", Context.MODE_PRIVATE)
+        prefs.edit {
+            putInt("modoTema", modo)
+        }
     }
 
     private fun cerrarSesion() {

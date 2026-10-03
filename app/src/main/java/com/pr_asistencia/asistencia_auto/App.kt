@@ -26,17 +26,20 @@ class App : Application() {
 
     private fun aplicarTema() {
         val prefs = getSharedPreferences("config", MODE_PRIVATE)
-        val tieneOverride = prefs.contains("darkMode")
 
-        if (!tieneOverride) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-        } else {
-            val darkMode = prefs.getBoolean("darkMode", false)
-            AppCompatDelegate.setDefaultNightMode(
-                if (darkMode) AppCompatDelegate.MODE_NIGHT_YES
-                else AppCompatDelegate.MODE_NIGHT_NO
-            )
+        val modoTema = when {
+            prefs.contains("modoTema") -> prefs.getInt("modoTema", 0)
+            prefs.contains("darkMode") -> if (prefs.getBoolean("darkMode", false)) 2 else 1
+            else -> 0
         }
+
+        AppCompatDelegate.setDefaultNightMode(
+            when (modoTema) {
+                1 -> AppCompatDelegate.MODE_NIGHT_NO
+                2 -> AppCompatDelegate.MODE_NIGHT_YES
+                else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+            }
+        )
     }
 
     private fun refreshHolidaysIfNeeded() {

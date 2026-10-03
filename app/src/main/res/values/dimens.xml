@@ -2,14 +2,28 @@
 <resources>
     <dimen name="corner_radius_card">16dp</dimen>
     <dimen name="corner_radius_button">28dp</dimen>
-    <dimen name="corner_radius_input">12dp</dimen>
+    <dimen name="corner_radius_input">14dp</dimen>
+    <dimen name="corner_radius_chip">16dp</dimen>
+    <dimen name="corner_radius_badge">10dp</dimen>
+
     <dimen name="margin_screen_horizontal">24dp</dimen>
     <dimen name="margin_screen_vertical">16dp</dimen>
     <dimen name="space_small">8dp</dimen>
     <dimen name="space_medium">16dp</dimen>
     <dimen name="space_large">24dp</dimen>
     <dimen name="space_xl">32dp</dimen>
+
     <dimen name="icon_size">24dp</dimen>
     <dimen name="icon_size_large">30dp</dimen>
     <dimen name="logo_size">120dp</dimen>
+
+    <dimen name="icon_circle_size">48dp</dimen>
+    <dimen name="height_button">54dp</dimen>
+    <dimen name="height_chip_time">64dp</dimen>
+
+    <dimen name="text_size_title">28sp</dimen>
+    <dimen name="text_size_section">16sp</dimen>
+    <dimen name="text_size_body">16sp</dimen>
+    <dimen name="text_size_label">13sp</dimen>
+    <dimen name="text_size_caption">12sp</dimen>
 </resources>

@@ -36,4 +36,9 @@ interface ApiService {
         @Query("SkipCount") skipCount: Int = 0,
         @Query("MaxResultCount") maxResultCount: Int = 0
     ): Response<ResponseBody>
+
+    @GET("api/services/app/User/GetMyProfile")
+    suspend fun getMyProfile(
+        @Header("Authorization") token: String
+    ): Response<ResponseBody>
 }

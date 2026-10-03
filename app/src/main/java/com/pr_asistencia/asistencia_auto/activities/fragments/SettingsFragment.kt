@@ -14,6 +14,7 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 import com.pr_asistencia.asistencia_auto.App
 import com.pr_asistencia.asistencia_auto.R
 import com.pr_asistencia.asistencia_auto.activities.LoginActivity
+import com.pr_asistencia.asistencia_auto.helper.ConfirmDialog
 
 class SettingsFragment : Fragment() {
 
@@ -29,7 +30,7 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.btnCerrarSesion)?.setOnClickListener {
-            cerrarSesion()
+            ConfirmDialog.cerrarSesion(requireContext()) { cerrarSesion() }
         }
 
         view.findViewById<MaterialButtonToggleGroup>(R.id.grupoTema)?.apply {

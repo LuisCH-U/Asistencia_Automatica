@@ -27,6 +27,7 @@ import com.pr_asistencia.asistencia_auto.R
 import com.pr_asistencia.asistencia_auto.activities.LoginActivity
 import com.pr_asistencia.asistencia_auto.firebase.FirebaseManager
 import com.pr_asistencia.asistencia_auto.helper.AlarmHelper
+import com.pr_asistencia.asistencia_auto.helper.ConfirmDialog
 import com.pr_asistencia.asistencia_auto.helper.NotificationHelper
 import com.pr_asistencia.asistencia_auto.manager.AttendanceManager
 import com.pr_asistencia.asistencia_auto.receiver.AttendanceReceiver
@@ -93,7 +94,7 @@ class HomeFragment : Fragment() {
         }
 
         btnMarcarAhora.setOnClickListener {
-            marcarManual()
+            ConfirmDialog.marcarAhora(requireContext()) { marcarManual() }
         }
 
         btnVerAsistencias.setOnClickListener {
@@ -103,7 +104,7 @@ class HomeFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.btnCerrarSesion)?.setOnClickListener {
-            cerrarSesion()
+            ConfirmDialog.cerrarSesion(requireContext()) { cerrarSesion() }
         }
 
         solicitarPermisoExactAlarm()

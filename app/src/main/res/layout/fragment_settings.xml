@@ -224,7 +224,7 @@
                     android:id="@+id/txtVersion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Asis v1.3"
+                    android:text="Asis v1.4"
                     android:textColor="@color/brand_text_primary"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
